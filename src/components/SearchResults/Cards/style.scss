@@ -1,0 +1,46 @@
+@use '../../../styles/variables' as v;
+
+.search-result-card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  // border: 1px solid v.$color;
+  padding: 1em;
+
+  img {
+    width: auto;
+    height: 15em;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  h3 {
+    margin-top: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  p {
+    margin-top: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .search-result-card {
+    padding: 2em;
+    img {
+      width: auto;
+     height: 30em;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+}

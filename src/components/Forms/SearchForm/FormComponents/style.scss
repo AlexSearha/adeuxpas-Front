@@ -1,0 +1,25 @@
+@use '../../../../styles/variables' as v;
+
+.address-textfield {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  width: 100%;
+  top: 60px;
+  left: 0;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  border: 1px solid black;
+  z-index: 9999;
+}
+
+.dropdown-address {
+  cursor: pointer;
+}
+
+.dropdown-address:hover {
+  background-color: #00000038;
+}

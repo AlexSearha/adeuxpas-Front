@@ -1,0 +1,586 @@
+{
+  "activities": [
+    {
+      "nom": "AquaZen",
+      "adresse": "Plage de Nice, 06000, France",
+      "latitude": 43.7031,
+      "longitude": 7.2661,
+      "photos": "lien_vers_photo73.jpg, lien_vers_photo74.jpg",
+      "activite": "Pres de l'eau"
+    },
+    {
+      "nom": "AlpineEvasion",
+      "adresse": "Sommet des Alpes, 74400, France",
+      "latitude": 45.9237,
+      "longitude": 6.8694,
+      "photos": "https://www.radiofrance.fr/s3/cruiser-production/2021/02/d6dbefb8-31a6-47d1-ba49-663f924f9484/860_gettyimages-1183967499.jpg",
+      "activite": "Montagne"
+    },
+    {
+      "nom": "EnchantedWoods",
+      "adresse": "Foret enchantée, 91230, France",
+      "latitude": 48.8535,
+      "longitude": 4.5713,
+      "photos": "lien_vers_photo76.jpg",
+      "activite": "Foret",
+      "id": "act001"
+    },
+    {
+      "nom": "RusticCharm",
+      "adresse": "Campagne paisible, 24200, France",
+      "latitude": 45.0412,
+      "longitude": 0.9948,
+      "photos": "lien_vers_photo77.jpg",
+      "activite": "Campagne",
+      "id": "act002"
+    },
+    {
+      "nom": "UrbanEscapade",
+      "adresse": "Centre-ville de Paris, 75001, France",
+      "latitude": 48.8572,
+      "longitude": 2.3523,
+      "photos": "lien_vers_photo78.jpg",
+      "activite": "Ville",
+      "id": "act003"
+    },
+    {
+      "nom": "TimelessHeritage",
+      "adresse": "Monuments historiques, 84000, France",
+      "latitude": 43.9509,
+      "longitude": 4.8075,
+      "photos": "lien_vers_photo79.jpg, lien_vers_photo80.jpg",
+      "activite": "Monuments",
+      "id": "act004"
+    },
+    {
+      "nom": "ArtisticGems",
+      "adresse": "Musée d'Art, 67000, France",
+      "latitude": 48.5809,
+      "longitude": 7.7438,
+      "photos": "lien_vers_photo81.jpg",
+      "activite": "Musees",
+      "id": "act005"
+    },
+    {
+      "nom": "TranquilStages",
+      "adresse": "Theatre du Relax, 06000, France",
+      "latitude": 43.7031,
+      "longitude": 7.2661,
+      "photos": "lien_vers_photo82.jpg",
+      "activite": "Theatre",
+      "id": "act006"
+    },
+    {
+      "nom": "HarmonyMelodies",
+      "adresse": "Salle de concert mélodie, 13000, France",
+      "latitude": 43.2965,
+      "longitude": 5.3698,
+      "photos": "lien_vers_photo83.jpg",
+      "activite": "Musique"
+    },
+    {
+      "nom": "BlissfulRetreat",
+      "adresse": "Spa & Massage Zen, 06400, France",
+      "latitude": 43.5528,
+      "longitude": 7.0174,
+      "photos": "lien_vers_photo84.jpg",
+      "activite": "Massage"
+    },
+    {
+      "nom": "SerenityShala",
+      "adresse": "Studio de yoga, 74000, France",
+      "latitude": 45.8992,
+      "longitude": 6.1294,
+      "photos": "lien_vers_photo85.jpg",
+      "activite": "Yoga"
+    },
+    {
+      "nom": "OceanicRetreat",
+      "adresse": "Centre de Thalassothérapie, 44500, France",
+      "latitude": 47.2847,
+      "longitude": -2.3858,
+      "photos": "lien_vers_photo86.jpg",
+      "activite": "Thalassotherapie"
+    },
+    {
+      "nom": "AquaParaiso",
+      "adresse": "Plage de Biarritz, 64200, France",
+      "latitude": 43.4829,
+      "longitude": -1.5614,
+      "photos": "lien_vers_photo87.jpg, lien_vers_photo88.jpg",
+      "activite": "Pres de l'eau"
+    },
+    {
+      "nom": "AlpineRetreat",
+      "adresse": "Sommet du Mont Blanc, 74400, France",
+      "latitude": 45.8322,
+      "longitude": 6.8652,
+      "photos": "https://cdn.pixabay.com/photo/2016/10/14/19/21/canyon-1740973_960_720.jpg",
+      "activite": "Montagne"
+    },
+    {
+      "nom": "EnchantedWoods",
+      "adresse": "Foret de Fontainebleau, 77300, France",
+      "latitude": 48.4049,
+      "longitude": 2.7017,
+      "photos": "lien_vers_photo90.jpg",
+      "activite": "Foret"
+    },
+    {
+      "nom": "RusticCharm",
+      "adresse": "Campagne paisible, 24100, France",
+      "latitude": 45.0412,
+      "longitude": 0.9948,
+      "photos": "lien_vers_photo91.jpg",
+      "activite": "Campagne"
+    },
+    {
+      "nom": "UrbanVibes",
+      "adresse": "Centre-ville de Lyon, 69001, France",
+      "latitude": 45.7679,
+      "longitude": 4.8343,
+      "photos": "lien_vers_photo92.jpg",
+      "activite": "Ville"
+    },
+    {
+      "nom": "TimelessHeritage",
+      "adresse": "Monuments historiques, 75004, France",
+      "latitude": 48.857,
+      "longitude": 2.3507,
+      "photos": "lien_vers_photo93.jpg, lien_vers_photo94.jpg",
+      "activite": "Monuments"
+    },
+    {
+      "nom": "ArtisticGems",
+      "adresse": "Musée du Louvre, 75001, France",
+      "latitude": 48.8606,
+      "longitude": 2.3376,
+      "photos": "lien_vers_photo95.jpg",
+      "activite": "Musees"
+    },
+    {
+      "nom": "TranquilStages",
+      "adresse": "Theatre du Relax, 06000, France",
+      "latitude": 43.7031,
+      "longitude": 7.2661,
+      "photos": "lien_vers_photo96.jpg",
+      "activite": "Theatre"
+    },
+    {
+      "nom": "HarmonyMelodies",
+      "adresse": "Salle de concert mélodie, 13006, France",
+      "latitude": 43.2965,
+      "longitude": 5.3698,
+      "photos": "lien_vers_photo97.jpg",
+      "activite": "Musique"
+    },
+    {
+      "nom": "BlissfulRetreat",
+      "adresse": "Spa & Massage Zen, 06400, France",
+      "latitude": 43.5528,
+      "longitude": 7.0174,
+      "photos": "lien_vers_photo98.jpg",
+      "activite": "Massage"
+    },
+    {
+      "nom": "SerenityShala",
+      "adresse": "Studio de yoga, 74000, France",
+      "latitude": 45.8992,
+      "longitude": 6.1294,
+      "photos": "lien_vers_photo99.jpg",
+      "activite": "Yoga"
+    },
+    {
+      "nom": "OceanicRetreat",
+      "adresse": "Centre de Thalassothérapie, 44500, France",
+      "latitude": 47.2847,
+      "longitude": -2.3858,
+      "photos": "lien_vers_photo100.jpg",
+      "activite": "Thalassotherapie"
+    },
+    {
+      "nom": "MarineSerenity",
+      "adresse": "Plage de Saint-Malo, 35400, France",
+      "latitude": 48.6495,
+      "longitude": -2.0255,
+      "photos": "lien_vers_photo101.jpg, lien_vers_photo102.jpg",
+      "activite": "Pres de l'eau"
+    },
+    {
+      "nom": "AlpineGetaway",
+      "adresse": "Sommet des Pyrénées, 65120, France",
+      "latitude": 42.8105,
+      "longitude": 0.179,
+      "photos": "lien_vers_photo103.jpg",
+      "activite": "Montagne"
+    },
+    {
+      "nom": "EnchantedGlade",
+      "adresse": "Foret de Rambouillet, 78120, France",
+      "latitude": 48.6443,
+      "longitude": 1.8275,
+      "photos": "lien_vers_photo104.jpg",
+      "activite": "Foret"
+    },
+    {
+      "nom": "RuralRetreat",
+      "adresse": "Campagne pittoresque, 01330, France",
+      "latitude": 46.0278,
+      "longitude": 4.999,
+      "photos": "lien_vers_photo105.jpg",
+      "activite": "Campagne"
+    },
+    {
+      "nom": "UrbanVibes",
+      "adresse": "Quartier du Marais, Paris, 75003, France",
+      "latitude": 48.8582,
+      "longitude": 2.358,
+      "photos": "lien_vers_photo106.jpg",
+      "activite": "Ville"
+    },
+    {
+      "nom": "EternalSplendor",
+      "adresse": "Palais du Luxembourg, Paris, 75006, France",
+      "latitude": 48.8462,
+      "longitude": 2.3372,
+      "photos": "lien_vers_photo107.jpg, lien_vers_photo108.jpg",
+      "activite": "Monuments"
+    },
+    {
+      "nom": "ArtisticGems",
+      "adresse": "Musée d'Orsay, Paris, 75007, France",
+      "latitude": 48.86,
+      "longitude": 2.3266,
+      "photos": "lien_vers_photo109.jpg",
+      "activite": "Musees"
+    },
+    {
+      "nom": "HarmonyStages",
+      "adresse": "Theatre du Châtelet, Paris, 75001, France",
+      "latitude": 48.8572,
+      "longitude": 2.347,
+      "photos": "lien_vers_photo110.jpg",
+      "activite": "Theatre"
+    },
+    {
+      "nom": "MelodicJourney",
+      "adresse": "Salle de concert Symphonie, 67000, France",
+      "latitude": 48.5839,
+      "longitude": 7.7415,
+      "photos": "lien_vers_photo111.jpg",
+      "activite": "Musique"
+    },
+    {
+      "nom": "BlissfulRetreat",
+      "adresse": "Spa & Massage Zen, 06000, France",
+      "latitude": 43.7031,
+      "longitude": 7.2661,
+      "photos": "lien_vers_photo112.jpg",
+      "activite": "Massage"
+    },
+    {
+      "nom": "SerenityShala",
+      "adresse": "Studio de yoga, 69006, France",
+      "latitude": 45.7699,
+      "longitude": 4.8535,
+      "photos": "lien_vers_photo113.jpg",
+      "activite": "Yoga"
+    },
+    {
+      "nom": "CoastalHaven",
+      "adresse": "Centre de Thalassothérapie, 76400, France",
+      "latitude": 49.3984,
+      "longitude": 0.1077,
+      "photos": "lien_vers_photo114.jpg",
+      "activite": "Thalassotherapie"
+    },
+    {
+      "nom": "AquaticHaven",
+      "adresse": "Plage de Biarritz, 64200, France",
+      "latitude": 43.4829,
+      "longitude": -1.5614,
+      "photos": "lien_vers_photo115.jpg, lien_vers_photo116.jpg",
+      "activite": "Pres de l'eau"
+    },
+    {
+      "nom": "MountainEscape",
+      "adresse": "Sommet du Mont Blanc, 74400, France",
+      "latitude": 45.8322,
+      "longitude": 6.8652,
+      "photos": "https://media.istockphoto.com/id/1288385045/fr/photo/sommet-enneig%C3%A9-de-k2.jpg?s=612x612&w=0&k=20&c=sDlQtKzIFssgEWd28l3SQxi5W_XLNjOsHuN1vb6Yo5U=",
+      "activite": "Montagne"
+    },
+    {
+      "nom": "EnchantedTrails",
+      "adresse": "Foret de Brocéliande, 35380, France",
+      "latitude": 48.0164,
+      "longitude": -2.1803,
+      "photos": "lien_vers_photo118.jpg",
+      "activite": "Foret"
+    },
+    {
+      "nom": "CountrysideRetreat",
+      "adresse": "Campagne sereine, 31150, France",
+      "latitude": 43.6156,
+      "longitude": 1.2759,
+      "photos": "lien_vers_photo119.jpg",
+      "activite": "Campagne"
+    },
+    {
+      "nom": "UrbanOasis",
+      "adresse": "Centre-ville de Bordeaux, 33000, France",
+      "latitude": 44.8378,
+      "longitude": -0.5792,
+      "photos": "lien_vers_photo120.jpg",
+      "activite": "Ville"
+    },
+    {
+      "nom": "TimelessWonders",
+      "adresse": "Château de Chenonceau, 37150, France",
+      "latitude": 47.3243,
+      "longitude": 1.0701,
+      "photos": "lien_vers_photo121.jpg, lien_vers_photo122.jpg",
+      "activite": "Monuments"
+    },
+    {
+      "nom": "ArtisticTreasures",
+      "adresse": "Musée du Quai Branly, 75007, France",
+      "latitude": 48.86,
+      "longitude": 2.2977,
+      "photos": "lien_vers_photo123.jpg",
+      "activite": "Musees"
+    },
+    {
+      "nom": "HarmonyScenes",
+      "adresse": "Theatre des Célestins, 69002, France",
+      "latitude": 45.7597,
+      "longitude": 4.8306,
+      "photos": "lien_vers_photo124.jpg",
+      "activite": "Theatre"
+    },
+    {
+      "nom": "MelodicEncounters",
+      "adresse": "Stade Pierre-Mauroy, 59650, France",
+      "latitude": 50.6102,
+      "longitude": 3.1337,
+      "photos": "lien_vers_photo125.jpg",
+      "activite": "Musique"
+    },
+    {
+      "nom": "BlissfulRetreat",
+      "adresse": "Spa & Massage Zen, 06000, France",
+      "latitude": 43.7031,
+      "longitude": 7.2661,
+      "photos": "lien_vers_photo126.jpg",
+      "activite": "Massage"
+    },
+    {
+      "nom": "SerenityShala",
+      "adresse": "Studio de yoga, 75011, France",
+      "latitude": 48.8592,
+      "longitude": 2.3789,
+      "photos": "lien_vers_photo127.jpg",
+      "activite": "Yoga"
+    },
+    {
+      "nom": "CoastalBliss",
+      "adresse": "Centre de Thalassothérapie, 29950, France",
+      "latitude": 48.2848,
+      "longitude": -4.6035,
+      "photos": "lien_vers_photo128.jpg",
+      "activite": "Thalassotherapie"
+    },
+    {
+      "nom": "SeafrontBliss",
+      "adresse": "Plage de Nice, 06000, France",
+      "latitude": 43.7031,
+      "longitude": 7.2661,
+      "photos": "lien_vers_photo129.jpg, lien_vers_photo130.jpg",
+      "activite": "Pres de l'eau"
+    },
+    {
+      "nom": "AlpineRetreat",
+      "adresse": "Sommet des Vosges, 88400, France",
+      "latitude": 48.1427,
+      "longitude": 6.8762,
+      "photos": "lien_vers_photo131.jpg",
+      "activite": "Montagne"
+    },
+    {
+      "nom": "EnchantedTranquility",
+      "adresse": "Foret de Compiègne, 60200, France",
+      "latitude": 49.433,
+      "longitude": 2.8382,
+      "photos": "lien_vers_photo132.jpg",
+      "activite": "Foret"
+    },
+    {
+      "nom": "RuralGetaway",
+      "adresse": "Campagne pittoresque, 49100, France",
+      "latitude": 47.4985,
+      "longitude": -0.5708,
+      "photos": "lien_vers_photo133.jpg",
+      "activite": "Campagne"
+    },
+    {
+      "nom": "UrbanEscape",
+      "adresse": "Centre-ville de Marseille, 13001, France",
+      "latitude": 43.2965,
+      "longitude": 5.3748,
+      "photos": "lien_vers_photo134.jpg",
+      "activite": "Ville"
+    },
+    {
+      "nom": "TimelessElegance",
+      "adresse": "Château de Versailles, 78000, France",
+      "latitude": 48.8048,
+      "longitude": 2.1204,
+      "photos": "lien_vers_photo135.jpg, lien_vers_photo136.jpg",
+      "activite": "Monuments"
+    },
+    {
+      "nom": "ArtisticWonders",
+      "adresse": "Musée Rodin, 75007, France",
+      "latitude": 48.8551,
+      "longitude": 2.3157,
+      "photos": "lien_vers_photo137.jpg",
+      "activite": "Musees"
+    },
+    {
+      "nom": "HarmonyStages",
+      "adresse": "Theatre de la Ville, 75004, France",
+      "latitude": 48.8575,
+      "longitude": 2.3529,
+      "photos": "lien_vers_photo138.jpg",
+      "activite": "Theatre"
+    },
+    {
+      "nom": "MelodicEncounters",
+      "adresse": "Stade Vélodrome, 13008, France",
+      "latitude": 43.2696,
+      "longitude": 5.3952,
+      "photos": "lien_vers_photo139.jpg",
+      "activite": "Musique"
+    },
+    {
+      "nom": "TranquilRetreat",
+      "adresse": "Spa & Massage Calme, 06300, France",
+      "latitude": 43.7031,
+      "longitude": 7.2661,
+      "photos": "lien_vers_photo140.jpg",
+      "activite": "Massage"
+    },
+    {
+      "nom": "SerenityShala",
+      "adresse": "Studio de yoga, 75012, France",
+      "latitude": 48.8455,
+      "longitude": 2.3764,
+      "photos": "lien_vers_photo141.jpg",
+      "activite": "Yoga"
+    },
+    {
+      "nom": "CoastalSanctuary",
+      "adresse": "Centre de Thalassothérapie, 17340, France",
+      "latitude": 45.9182,
+      "longitude": -1.173,
+      "photos": "lien_vers_photo142.jpg",
+      "activite": "Thalassotherapie"
+    },
+    {
+      "nom": "SeasideHaven",
+      "adresse": "Plage de Deauville, 14800, France",
+      "latitude": 49.3581,
+      "longitude": 0.0662,
+      "photos": "lien_vers_photo143.jpg, lien_vers_photo144.jpg",
+      "activite": "Pres de l'eau"
+    },
+    {
+      "nom": "MountainVista",
+      "adresse": "Sommet du Mont Ventoux, 84340, France",
+      "latitude": 44.1733,
+      "longitude": 5.2736,
+      "photos": "lien_vers_photo145.jpg",
+      "activite": "Montagne"
+    },
+    {
+      "nom": "EnchantedTrails",
+      "adresse": "Foret de Fontainebleau, 77300, France",
+      "latitude": 48.4049,
+      "longitude": 2.7017,
+      "photos": "lien_vers_photo146.jpg",
+      "activite": "Foret"
+    },
+    {
+      "nom": "CountrysideRetreat",
+      "adresse": "Campagne sereine, 49100, France",
+      "latitude": 47.4985,
+      "longitude": -0.5708,
+      "photos": "lien_vers_photo147.jpg",
+      "activite": "Campagne"
+    },
+    {
+      "nom": "UrbanSerenity",
+      "adresse": "Centre-ville de Lyon, 69001, France",
+      "latitude": 45.7679,
+      "longitude": 4.8343,
+      "photos": "lien_vers_photo148.jpg",
+      "activite": "Ville"
+    },
+    {
+      "nom": "TimelessTowers",
+      "adresse": "Tour Eiffel, Paris, 75007, France",
+      "latitude": 48.8584,
+      "longitude": 2.2945,
+      "photos": "lien_vers_photo149.jpg, lien_vers_photo150.jpg",
+      "activite": "Monuments"
+    },
+    {
+      "nom": "ArtisticGems",
+      "adresse": "Musée du Louvre, Paris, 75001, France",
+      "latitude": 48.8606,
+      "longitude": 2.3376,
+      "photos": "lien_vers_photo151.jpg",
+      "activite": "Musees"
+    },
+    {
+      "nom": "HarmonyStages",
+      "adresse": "Theatre du Châtelet, Paris, 75001, France",
+      "latitude": 48.8572,
+      "longitude": 2.347,
+      "photos": "lien_vers_photo152.jpg",
+      "activite": "Theatre"
+    },
+    {
+      "nom": "MelodicEncounters",
+      "adresse": "Stade de France, 93216, France",
+      "latitude": 48.9215,
+      "longitude": 2.3621,
+      "photos": "lien_vers_photo153.jpg",
+      "activite": "Musique"
+    },
+    {
+      "nom": "BlissfulRetreat",
+      "adresse": "Spa & Massage Zen, 06000, France",
+      "latitude": 43.7031,
+      "longitude": 7.2661,
+      "photos": "lien_vers_photo154.jpg",
+      "activite": "Massage"
+    },
+    {
+      "nom": "SerenityShala",
+      "adresse": "Studio de yoga, 75012, France",
+      "latitude": 48.8455,
+      "longitude": 2.3764,
+      "photos": "lien_vers_photo155.jpg",
+      "activite": "Yoga"
+    },
+    {
+      "nom": "CoastalBliss",
+      "adresse": "Centre de Thalassothérapie, 29950, France",
+      "latitude": 48.2848,
+      "longitude": -4.6035,
+      "photos": "lien_vers_photo156.jpg",
+      "activite": "Thalassotherapie"
+    }
+  ]
+}

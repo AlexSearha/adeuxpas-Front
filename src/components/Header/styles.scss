@@ -1,0 +1,47 @@
+@use '../../styles/variables' as v;
+
+.header {
+  width: 100%;
+  color: v.$color;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+background-color: v.$color-primary;
+
+  &__logo {
+    font-size: 1em;
+    font-weight: bold;
+    padding: 2px;
+    color: v.$color;
+  }
+
+  &__buttons {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .header {
+    width: 100%;
+    color: v.$color;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: none;
+
+    &__logo {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px;
+      color: v.$color;
+    }
+
+    &__buttons {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}

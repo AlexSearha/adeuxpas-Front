@@ -1,0 +1,17 @@
+@use '../../../styles/variables' as v;
+
+
+
+.total {
+font-size: 0.6em;
+color: rgb(65, 64, 64);
+
+&__title {
+  font-size: 1.7em;
+  padding: 0.5em;
+}
+
+  &__estimate{
+      color: v.$color-primary;
+  }
+}

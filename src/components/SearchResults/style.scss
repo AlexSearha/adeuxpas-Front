@@ -1,0 +1,124 @@
+@use '../../styles/variables' as v;
+
+.slider {
+  text-align: center;
+  padding: 1em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  &__card {
+    height: 100%;
+    // display: flex;
+    border-radius: 5px;
+    margin: 2em;
+    // justify-content: center;
+  }
+
+  &__header {
+    font-size: 1.5em;
+  }
+
+  &__img {
+    display: flex;
+    height: 10em;
+    border-radius: 5px;
+    width: 10em;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  &__container {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid v.$color;
+  }
+
+  &__title {
+    font-size: 1em;
+    border-radius: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+  }
+
+  &__description {
+    width: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .slick-track {
+    width: max-content;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .slider {
+    text-align: center;
+    padding: 1em;
+    width: 100%;
+    // border: 1px solid blue;
+
+    &__card {
+      // display: flex;
+      width: 30em;
+      height: 30em;
+      // flex-direction: column;
+      // justify-content: center;
+      // align-items: center;
+      // text-align: center;
+      // border: 1px solid v.$color;
+      // padding: 16px;
+      // border: 1px solid #ccc;
+      border-radius: 8px;
+      // background-color: #f7f7f7;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 8px;
+    }
+
+    &__header {
+      font-size: 1.5em;
+    }
+
+    &__img {
+      margin: 8px;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      object-fit: cover;
+      overflow: hidden;
+    }
+
+    &__container {
+      // display: flex;
+      // justify-content: center;
+      // width: 100%;
+      border-radius: 5px;
+      border: 1px solid v.$color;
+    }
+
+    &__title {
+      // font-size: 1em;
+      // border-radius: 5px;
+      // display: -webkit-box;
+      // -webkit-line-clamp: 2; /* Limit to 2 lines */
+      // -webkit-box-orient: vertical;
+      margin-top: 10px;
+    }
+
+    &__description {
+      width: auto;
+      // display: -webkit-box;
+      // -webkit-line-clamp: 2; /* Limit to 2 lines */
+      // -webkit-box-orient: vertical;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      margin-top: 5px;
+    }
+  }
+}

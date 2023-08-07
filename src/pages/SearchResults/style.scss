@@ -1,0 +1,76 @@
+@use '../../styles/variables' as v;
+
+.result{ 
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  text-align: center;
+  background-color:rgba(255, 255, 255, 0.3);
+  // padding:  1em 0em 1em 0em; 
+
+  &__map{
+    position: relative;
+    display: block;
+    // flex-direction: column;
+    width: 100vw;
+    height: 30%;
+    // padding: 1em;
+    // margin-top: 1em;
+  }
+
+&__details{
+   display: flex;
+   padding: 1em;
+margin: 1em;
+background-color: #d1d7df;
+color: white;
+align-items: center;
+  }
+
+  &__card{
+    position: relative;
+    display: block;
+    // ne pas ajouter de height sous peine que les éléments se chevauchent
+    // height: 20%;
+    // padding: 1em;
+    width: 50%;
+  }
+
+  &__estimate {
+    align-content: center;
+    align-self: center;
+    padding: 1em;
+    width: 50%;
+    text-align: left;
+
+  }
+
+  &__listing{
+padding: 0.7em;
+margin:  0 0 1em 0;
+  }
+
+  &__suggestions {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0.7em;
+    font-size: 0.8em;
+
+  }
+}
+
+.result-suggestions{
+  width: 100%;
+  height: auto;
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  
+}
