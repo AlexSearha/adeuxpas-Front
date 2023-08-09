@@ -10,6 +10,7 @@ interface UserState {
   name: string | '';
   email: string | '';
   password: string | '';
+  error: string | undefined;
   isLogged: boolean;
   isLoading: boolean;
 }
@@ -18,6 +19,7 @@ export const initialState: UserState = {
   name: '',
   email: '',
   password: '',
+  error: '',
   isLogged: false,
   isLoading: false,
 };
@@ -35,9 +37,9 @@ export const login = createAsyncThunk(
     };
     const { data } = await backEndAPI.post('login', bodyData);
 
-    backEndAPI.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+    backEndAPI.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
 
-    delete data.token;
+    delete data.accessToken;
 
     return data;
   }
@@ -75,10 +77,16 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(login.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isLogged = true;
-      state.name = action.payload.pseudo;
+      state.email = action.payload.email;
+      state.error = initialState.error;
+    })
+    .addCase(login.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
     })
     .addCase(logout, (state) => {
       state.isLogged = initialState.isLogged;
+      state.email = initialState.email;
       state.name = initialState.name;
 
       delete backEndAPI.defaults.headers.common.Authorization;
@@ -91,6 +99,7 @@ const userReducer = createReducer(initialState, (builder) => {
       state.email = action.payload;
       state.name = action.payload;
       state.password = action.payload;
+      state.error = initialState.error;
     });
 });
 

@@ -4,8 +4,8 @@
   align-content: center;
   flex-direction: column;
   background-color: #e1e5eb;
-  padding:  2em 0em 2em 0em;
-
+  padding: 2em 0em 2em 0em;
+  flex-grow: 1;
 
   &__card {
     max-width: 400px;

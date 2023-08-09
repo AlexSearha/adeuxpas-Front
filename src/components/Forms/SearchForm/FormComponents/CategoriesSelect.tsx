@@ -56,7 +56,7 @@ export default function CategoriesSelect({ label, ...props }: Props) {
           value={field.value}
           name={field.name}
           error={meta.touched && Boolean(meta.error)}
-          onChange={handleCategoryChange} // Utilisez handleCategoryChange ici
+          onChange={handleCategoryChange}
         >
           {!isLoading &&
             categories.map((category: any) => (

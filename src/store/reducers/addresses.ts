@@ -37,7 +37,6 @@ export const fetchAddresses = createAsyncThunk(
     const { data } = await addressAPI.get<Feature[]>(
       `?q=${addressValue}&type=housenumber&autocomplete=1`
     );
-    console.log(data);
     return data as Feature[];
   }
 );

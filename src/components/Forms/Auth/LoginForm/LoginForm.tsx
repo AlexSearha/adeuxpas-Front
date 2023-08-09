@@ -1,62 +1,72 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
+  Alert,
   Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
+  createTheme,
 } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { validate } from 'email-validator';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { login } from '../../../../store/reducers/users';
 
-import { useAppDispatch } from '../../../hooks/redux';
-import './style.scss';
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#a0c695ff',
+      contrastText: '#faf9f6ff',
+    },
+    secondary: {
+      main: '#faf9f6ff',
+      contrastText: '#a0c695ff',
+    },
+  },
+});
 
-export default function RegisterForm() {
+export default function LoginForm() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const errorState = useAppSelector((state) => state.user.error);
 
+  // dispatch actions
   const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
-      firstname: '',
-      email: '',
-      password: '',
-      checkpass: '',
+      email: 'alex@hotmail.com',
+      password: 'coucou',
     },
     validationSchema: Yup.object({
-      firstname: Yup.string().required('Champ requis'),
       email: Yup.string()
-        .email('Adresse e-mail invalide')
+        .email('Invalid email address')
         .required('Email requis'),
       password: Yup.string().required('Mot de passe requis'),
-      checkpass: Yup.string()
-        .oneOf(
-          [Yup.ref('password'), null],
-          'Les mots de passe ne correspondent pas'
-        )
-        .required('Confirmation mot de passe requise'),
     }),
-    onSubmit: (values, { resetForm }) => {
-      if (
-        formik.values.password === formik.values.checkpass &&
-        validate(formik.values.email)
-      ) {
-        alert(JSON.stringify(values, null, 2));
-      } else {
-        alert(
-          'Veuillez corriger les erreurs avant de soumettre le formulaire.'
-        );
+    onSubmit: async (values, { resetForm }) => {
+      if (validate(formik.values.email)) {
+        await dispatch(login(values));
       }
       resetForm();
     },
   });
+
+  useEffect(() => {
+    if (errorState === 'Request failed with status code 401') {
+      setErrorMessage('Votre e-mail ou votre mot de passe est incorrect');
+    } else {
+      setErrorMessage('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errorState]);
+
   return (
     <div className="buttons">
       <Button
@@ -64,29 +74,17 @@ export default function RegisterForm() {
         variant="contained"
         size="small"
         color="secondary"
-        sx={{ m: 0.5, fontSize:10}}
+        sx={{ m: 0.5, fontSize: 10 }}
         onClick={handleOpen}
       >
-        créer un compte
+        Se connecter
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Créer votre compte</DialogTitle>
+        <DialogTitle>Bonjour !</DialogTitle>
         <DialogContent>
-          <DialogContentText>Et si on faisait connaissance ?</DialogContentText>
           <form onSubmit={formik.handleSubmit}>
             <Box className="register-form" sx={{ flexGrow: 1, mt: '1rem' }}>
-              <TextField
-                required
-                id="firstname"
-                name="firstname"
-                label="Pseudo"
-                onChange={formik.handleChange}
-                value={formik.values.firstname}
-                error={
-                  formik.touched.firstname && Boolean(formik.errors.firstname)
-                }
-                helperText={formik.touched.firstname && formik.errors.firstname}
-              />
+              {!!errorState && <Alert severity="error">{errorMessage}</Alert>}
               <TextField
                 required
                 id="email"
@@ -98,7 +96,7 @@ export default function RegisterForm() {
                 helperText={formik.touched.email && formik.errors.email}
               />
               <TextField
-                id="password"
+                id="filled-password"
                 label="Mot de passe"
                 name="password"
                 type="password"
@@ -109,19 +107,6 @@ export default function RegisterForm() {
                   formik.touched.password && Boolean(formik.errors.password)
                 }
                 helperText={formik.touched.password && formik.errors.password}
-              />
-              <TextField
-                id="check-password"
-                label="Confirmation mot de passe"
-                name="checkpass"
-                type="password"
-                autoComplete="off"
-                onChange={formik.handleChange}
-                value={formik.values.checkpass}
-                error={
-                  formik.touched.checkpass && Boolean(formik.errors.checkpass)
-                }
-                helperText={formik.touched.checkpass && formik.errors.checkpass}
               />
               <Button sx={{ color: 'white' }} type="submit" variant="contained">
                 se connecter{' '}

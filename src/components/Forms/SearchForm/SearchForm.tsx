@@ -42,7 +42,6 @@ function SearchForm() {
         onSubmit={(values) => {
           const result = { ...values, departureCoordinates };
           dispatch(getSearchDatas(result));
-          console.log(result);
           navigate('/searchresults', { state: { values } });
           // alert(JSON.stringify(result, null, 2));
         }}

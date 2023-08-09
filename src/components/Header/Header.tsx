@@ -1,21 +1,59 @@
-import React from 'react';
-import LoginForm from '../Auth/LoginForm/LoginForm';
-import RegisterForm from '../Auth/RegisterForm/RegisterForm';
-// import LoginButton from '../LoginButton/LoginButton';
-// import SignUpButton from '../SignUpButton/SignUpButton';
-
+import { Button, Stack } from '@mui/material';
+import { Navigate, useNavigate } from 'react-router';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import LoginForm from '../Forms/Auth/LoginForm/LoginForm';
+import RegisterForm from '../Forms/Auth/RegisterForm/RegisterForm';
+import { logout } from '../../store/reducers/users';
 import './styles.scss';
+import { Link } from 'react-router-dom';
+
+function NotConnected() {
+  return (
+    <>
+      <LoginForm />
+      <RegisterForm />
+    </>
+  );
+}
+
+function Connected() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  return (
+    <Stack direction="row" spacing={2}>
+      <Button
+        size="small"
+        color="secondary"
+        onClick={() => navigate('/myaccount')}
+        variant="contained"
+        sx={{ fontSize: 10 }}
+      >
+        Mon Compte
+      </Button>
+      <Button
+        size="small"
+        color="secondary"
+        variant="contained"
+        onClick={() => dispatch(logout())}
+        sx={{ fontSize: 10 }}
+      >
+        Se Déconnecter
+      </Button>
+    </Stack>
+  );
+}
 
 function Header() {
+  const isLogged = useAppSelector((state) => state.user.isLogged);
   return (
     <div>
       <header className="header">
         <div className="header__logo">
-          <a href="/">àdeuxpas.com </a>
+          <Link to="/">àdeuxpas.com</Link>
         </div>
         <div className="header__buttons">
-          <LoginForm />
-          <RegisterForm />
+          {isLogged ? <Connected /> : <NotConnected />}
         </div>
       </header>
     </div>

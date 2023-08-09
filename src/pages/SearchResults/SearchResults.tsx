@@ -24,6 +24,8 @@ import Map from './Map/Map';
 import SearchResultCard from '../../components/SearchResults/Cards/Card';
 import Images from '../../components/SearchResults/Images';
 import { SearchResult } from '../../@types';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 // Slider test
 // import Slider from 'react-slick';
 // import 'slick-carousel/slick/slick.css';
@@ -154,6 +156,7 @@ function SearchResults() {
     );
     setActivityChosenCoordinate(mainFunc);
     setIsActivityLoaded(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Dispatch Hotels
@@ -167,6 +170,7 @@ function SearchResults() {
         })
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActivityLoaded]);
 
   // Dispatch Restaurants
@@ -181,6 +185,7 @@ function SearchResults() {
         })
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hotelsListResult]);
 
   // Dispatch Supermrchés
@@ -195,6 +200,7 @@ function SearchResults() {
         })
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restaurantsListResult]);
 
   // Dispatch Peages
@@ -210,31 +216,41 @@ function SearchResults() {
       dispatch(fetchTolls(coordinatesPoints));
       dispatch(fetchFuelConsumption(coordinatesPoints));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marketsListResult]);
 
   return (
     <>
-      <div className='result'>
-        <div className='result__map'>
+      <Header />
+      <div className="result">
+        <div className="result__map">
           <Map />
         </div>
-        <div className='result__details'>
-          <div className='result__card'>
+        <div className="result__details">
+          <div className="result__card">
             <CardActivityChosen />
           </div>
-          <div className='result__estimate'>
+          <div className="result__estimate">
             <ListingRoadmap />
           </div>
         </div>
 
-        <div className='result__suggestions'>
-          <div className='result__listing'> <ListHotels /></div>
-          <div className='result__listing'><ListRestaurants /></div>
-          <div className='result__listing'><ListStores /></div>
+        <div className="result__suggestions">
+          <div className="result__listing">
+            {' '}
+            <ListHotels />
+          </div>
+          <div className="result__listing">
+            <ListRestaurants />
+          </div>
+          <div className="result__listing">
+            <ListStores />
+          </div>
         </div>
       </div>
+      <Footer />
     </>
-  )
+  );
 }
 
 export default SearchResults;
