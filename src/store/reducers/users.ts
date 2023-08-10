@@ -7,7 +7,7 @@ import {
 import { backEndAPI } from '../../utils/axios';
 
 interface UserState {
-  name: string | '';
+  firstname: string | '';
   email: string | '';
   password: string | '';
   error: string | undefined;
@@ -16,7 +16,7 @@ interface UserState {
 }
 
 export const initialState: UserState = {
-  name: '',
+  firstname: '',
   email: '',
   password: '',
   error: '',
@@ -26,6 +26,9 @@ export const initialState: UserState = {
 
 // LogOut action
 export const logout = createAction('user/logout');
+
+// Logg action
+export const setIsLoggin = createAction('user/setIsLoggin');
 
 // LogIn action (thunk)
 export const login = createAsyncThunk(
@@ -71,12 +74,14 @@ export const register = createAsyncThunk(
 
 const userReducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(setIsLoggin, (state) => {
+      state.isLogged = true;
+    })
     .addCase(login.pending, (state) => {
       state.isLoading = true;
     })
     .addCase(login.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.isLogged = true;
       state.email = action.payload.email;
       state.error = initialState.error;
     })
@@ -87,7 +92,7 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(logout, (state) => {
       state.isLogged = initialState.isLogged;
       state.email = initialState.email;
-      state.name = initialState.name;
+      state.firstname = initialState.firstname;
 
       delete backEndAPI.defaults.headers.common.Authorization;
     })
@@ -96,9 +101,8 @@ const userReducer = createReducer(initialState, (builder) => {
     })
     .addCase(register.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.email = action.payload;
-      state.name = action.payload;
-      state.password = action.payload;
+      state.email = action.payload.email;
+      state.firstname = action.payload.firstname;
       state.error = initialState.error;
     });
 });

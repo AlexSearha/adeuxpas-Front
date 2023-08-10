@@ -20,6 +20,8 @@ import { useAppSelector } from '../../hooks/redux';
 
 // Import CSS
 import './App.scss';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 const theme = createTheme({
   palette: {
@@ -49,6 +51,7 @@ function App() {
         >
           {' '}
           <BrowserRouter>
+            <Header />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/searchresults" element={<SearchResults />} />
@@ -56,8 +59,13 @@ function App() {
                 path="/myaccount"
                 element={isLogged ? <MyAccount /> : <Navigate to="/" />}
               />
+              <Route
+                path="/myaccount/favorites"
+                element={isLogged ? <MyAccount /> : <Navigate to="/" />}
+              />
               <Route path="/contact" element={<ContactPage />} />
             </Routes>
+            {/* <Footer /> */}
           </BrowserRouter>
         </LocalizationProvider>
       </div>

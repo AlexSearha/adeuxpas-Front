@@ -26,5 +26,17 @@
   "workbench.iconTheme": "material-icon-theme",
   "cSpell.words": [
     "airbnb"
+  ],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "database": "a2p",
+      "username": "alex",
+      "password": "alex",
+      "name": "adeuxpas"
+    }
   ]
 }

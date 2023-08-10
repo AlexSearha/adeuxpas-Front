@@ -5,46 +5,44 @@ import './styles.scss';
 
 function Footer() {
   return (
-    <div>
-      <footer className="footer">
-        <div className="footer__navigation">
-          <div className="footer__links-left">
-            <ul>
-              <li>
-                <a href="/wishlist">Ma wishlist</a>
-              </li>
-              <li>
-                <a href="/contact">Contact</a>
-              </li>
-              <li>
-                <a href="/about">A propos</a>
-              </li>
-            </ul>
-          </div>
-          <div className="footer__links-right">
-            <ul>
-              <li>
-                <a href="/help">Aide</a>
-              </li>
-              <li>
-                <a href="/privacy">Confidentialité</a>
-              </li>
-            </ul>
-          </div>
+    <footer className="footer">
+      <div className="footer__navigation">
+        <div className="footer__links-left">
+          <ul>
+            <li>
+              <a href="/wishlist">Ma wishlist</a>
+            </li>
+            <li>
+              <a href="/contact">Contact</a>
+            </li>
+            <li>
+              <a href="/about">A propos</a>
+            </li>
+          </ul>
         </div>
-        <div className="footer__social">
-          <a href="https://www.facebook.com">
-            <FacebookIcon />
-          </a>
-          <a href="https://www.twitter.com">
-            <TwitterIcon />
-          </a>
-          <a href="https://www.instagram.com">
-            <InstagramIcon />
-          </a>
+        <div className="footer__links-right">
+          <ul>
+            <li>
+              <a href="/help">Aide</a>
+            </li>
+            <li>
+              <a href="/privacy">Confidentialité</a>
+            </li>
+          </ul>
         </div>
-      </footer>
-    </div>
+      </div>
+      <div className="footer__social">
+        <a href="https://www.facebook.com">
+          <FacebookIcon />
+        </a>
+        <a href="https://www.twitter.com">
+          <TwitterIcon />
+        </a>
+        <a href="https://www.instagram.com">
+          <InstagramIcon />
+        </a>
+      </div>
+    </footer>
   );
 }
 

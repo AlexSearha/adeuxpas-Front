@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
+  Alert,
   Box,
   Button,
   Dialog,
@@ -12,14 +13,21 @@ import TextField from '@mui/material/TextField';
 import { validate } from 'email-validator';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useAppDispatch } from '../../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 
 import './style.scss';
 import { register } from '../../../../store/reducers/users';
 
 export default function RegisterForm() {
+  const emailStore = useAppSelector((state) => state.user.email);
+  const [authMessage, setAuthMessage] = useState<string>('');
+  const [alertType, setAlertType] = useState<string>('');
+  const [isAlert, setIsAlert] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    setIsAlert(false);
+  };
   const handleClose = () => setOpen(false);
 
   const dispatch = useAppDispatch();
@@ -49,15 +57,28 @@ export default function RegisterForm() {
         formik.values.password === formik.values.checkpass &&
         validate(formik.values.email)
       ) {
-        dispatch(register(values));
-      } else {
-        alert(
-          'Veuillez corriger les erreurs avant de soumettre le formulaire.'
-        );
+        try {
+          dispatch(register(values));
+          // setTimeout(() => {
+          //   resetForm();
+          //   handleClose();
+          // }, 3500);
+        } catch (error) {
+          // setAlertType('error');
+          // setAuthMessage('Veuillez recommencer');
+        }
       }
-      resetForm();
     },
   });
+
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-extra-boolean-cast
+  //   if (!!emailStore) {
+  //     setAlertType('success');
+  //     setAuthMessage('Enregistrement OK, veuillez vous identifier');
+  //     setIsAlert(true);
+  //   }
+  // }, [emailStore]);
   return (
     <div className="buttons">
       <Button
@@ -76,6 +97,7 @@ export default function RegisterForm() {
           <DialogContentText>Et si on faisait connaissance ?</DialogContentText>
           <form onSubmit={formik.handleSubmit}>
             <Box className="register-form" sx={{ flexGrow: 1, mt: '1rem' }}>
+              {isAlert && <Alert severity={alertType}>{authMessage}</Alert>}
               <TextField
                 required
                 id="firstname"

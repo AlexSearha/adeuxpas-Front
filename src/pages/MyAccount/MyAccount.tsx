@@ -1,9 +1,11 @@
+// React
+import { Link } from 'react-router-dom';
+
 // MUI
-import { Box, Link } from '@mui/material';
+import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import SecurityIcon from '@mui/icons-material/Security';
@@ -20,7 +22,7 @@ import Footer from '../../components/Footer/Footer';
 export default function MyAccount() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="myAccount">
         <Box
           sx={{
@@ -46,13 +48,16 @@ export default function MyAccount() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button
-                size="small"
-                href="https://www.google.com"
-                target="_blank"
+              <Link
+                to="/myaccount/informations"
+                style={{
+                  color: 'black',
+                  marginLeft: '5px',
+                  fontFamily: 'Roboto',
+                }}
               >
                 Modifier
-              </Button>
+              </Link>
             </CardActions>
           </Card>
           <Card
@@ -69,13 +74,16 @@ export default function MyAccount() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button
-                size="small"
-                href="https://www.google.com"
-                target="_blank"
+              <Link
+                to="/myaccount/favorites"
+                style={{
+                  color: 'black',
+                  marginLeft: '5px',
+                  fontFamily: 'Roboto',
+                }}
               >
                 Modifier
-              </Button>
+              </Link>
             </CardActions>
           </Card>
           <Card
@@ -92,13 +100,16 @@ export default function MyAccount() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button
-                size="small"
-                href="https://www.google.com"
-                target="_blank"
+              <Link
+                to="/myaccount/connexion-secutity"
+                style={{
+                  color: 'black',
+                  marginLeft: '5px',
+                  fontFamily: 'Roboto',
+                }}
               >
                 Modifier
-              </Button>
+              </Link>
             </CardActions>
           </Card>
           <Card
@@ -118,26 +129,21 @@ export default function MyAccount() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button
-                size="small"
-                href="https://www.google.com"
-                target="_blank"
+              <Link
+                to="/myaccount/favorite"
+                style={{
+                  color: 'black',
+                  marginLeft: '5px',
+                  fontFamily: 'Roboto',
+                }}
               >
                 Modifier
-              </Button>
+              </Link>
             </CardActions>
           </Card>
         </Box>
-        <Link
-          href="https://www.google.com"
-          target="_blank"
-          underline="hover"
-          sx={{ textAlign: 'center' }}
-        >
-          Supprimer mon compte
-        </Link>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

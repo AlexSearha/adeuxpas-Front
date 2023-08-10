@@ -14,7 +14,8 @@ import { validate } from 'email-validator';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { login } from '../../../../store/reducers/users';
+import { login, setIsLoggin } from '../../../../store/reducers/users';
+import { LinearDeterminate } from '../../../Loading/Loading';
 
 const theme = createTheme({
   palette: {
@@ -31,18 +32,22 @@ const theme = createTheme({
 
 export default function LoginForm() {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const [authMessage, setAuthMessage] = useState<string>('');
+  const [alertType, setAlertType] = useState<string>('');
+  const [isAlert, setIsAlert] = useState<boolean>(false);
+  const handleOpen = () => {
+    setOpen(true);
+    setIsAlert(false);
+  };
   const handleClose = () => setOpen(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
   const errorState = useAppSelector((state) => state.user.error);
 
-  // dispatch actions
   const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
-      email: 'alex@hotmail.com',
-      password: 'coucou',
+      email: '',
+      password: '',
     },
     validationSchema: Yup.object({
       email: Yup.string()
@@ -53,18 +58,30 @@ export default function LoginForm() {
     onSubmit: async (values, { resetForm }) => {
       if (validate(formik.values.email)) {
         await dispatch(login(values));
+        try {
+          setAlertType('success');
+          setAuthMessage('Vous êtes desormais connecté');
+          setIsAlert(true);
+          setOpen(true);
+          setTimeout(() => {
+            dispatch(setIsLoggin());
+            resetForm();
+          }, 3500);
+        } catch (error) {
+          setAlertType('error');
+          setAuthMessage('Veuillez recommencer');
+        }
       }
-      resetForm();
     },
   });
 
   useEffect(() => {
+    // eslint-disable-next-line no-extra-boolean-cast
     if (errorState === 'Request failed with status code 401') {
-      setErrorMessage('Votre e-mail ou votre mot de passe est incorrect');
-    } else {
-      setErrorMessage('');
+      setAlertType('error');
+      setAuthMessage('Votre e-mail ou votre mot de passe est incorrect');
+      setIsAlert(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errorState]);
 
   return (
@@ -80,11 +97,11 @@ export default function LoginForm() {
         Se connecter
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Bonjour !</DialogTitle>
+        <DialogTitle>Connexion</DialogTitle>
         <DialogContent>
           <form onSubmit={formik.handleSubmit}>
             <Box className="register-form" sx={{ flexGrow: 1, mt: '1rem' }}>
-              {!!errorState && <Alert severity="error">{errorMessage}</Alert>}
+              {isAlert && <Alert severity={alertType}>{authMessage}</Alert>}
               <TextField
                 required
                 id="email"
@@ -111,6 +128,8 @@ export default function LoginForm() {
               <Button sx={{ color: 'white' }} type="submit" variant="contained">
                 se connecter{' '}
               </Button>
+              // TODO:
+              <LinearDeterminate ms={3500} />
             </Box>
           </form>
         </DialogContent>

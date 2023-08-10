@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,10 +10,6 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useAppSelector } from '../../../hooks/redux';
 import { BusinessYelp } from '../../../@types';
 import './styles.scss';
-// Slider
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 export default function ListRestaurants() {
   const restaurantsStore = useAppSelector(
@@ -50,13 +49,16 @@ export default function ListRestaurants() {
       <div style={{ maxWidth: '100%', margin: '0 auto' }}>
         <Slider {...sliderSettings}>
           {restaurants.slice(0, 100).map((item) => (
-            <div key={item.id} style={{ flex: "50%", width: "100%", height: "150px" }}>
-            <Card style={{ margin: '0.5em', height: '400px' }}>
-              <CardActionArea style={{ height: '100%' }}>
-                <CardMedia
-                  component="img"
-                  height="60%"
-                  width="25%"
+            <div
+              key={item.id}
+              style={{ flex: '50%', width: '100%', height: '150px' }}
+            >
+              <Card style={{ margin: '0.5em', height: '400px' }}>
+                <CardActionArea style={{ height: '100%' }}>
+                  <CardMedia
+                    component="img"
+                    height="60%"
+                    width="25%"
                     image={
                       item.image_url === ''
                         ? 'https://media.istockphoto.com/id/1198045232/fr/photo/vivre-notre-meilleure-vie.jpg?s=612x612&w=0&k=20&c=01D37VlwfTBOPKwcqPTfBMVIQ_7Egk6jeYhKfNs81aM='
@@ -65,7 +67,12 @@ export default function ListRestaurants() {
                     alt={item.name}
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div" fontSize={15}>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      fontSize={15}
+                    >
                       {item.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">

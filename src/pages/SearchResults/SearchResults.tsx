@@ -220,36 +220,32 @@ function SearchResults() {
   }, [marketsListResult]);
 
   return (
-    <>
-      <Header />
-      <div className="result">
-        <div className="result__map">
-          <Map />
+    <div className="result">
+      <div className="result__map">
+        <Map />
+      </div>
+      <div className="result__details">
+        <div className="result__card">
+          <CardActivityChosen />
         </div>
-        <div className="result__details">
-          <div className="result__card">
-            <CardActivityChosen />
-          </div>
-          <div className="result__estimate">
-            <ListingRoadmap />
-          </div>
-        </div>
-
-        <div className="result__suggestions">
-          <div className="result__listing">
-            {' '}
-            <ListHotels />
-          </div>
-          <div className="result__listing">
-            <ListRestaurants />
-          </div>
-          <div className="result__listing">
-            <ListStores />
-          </div>
+        <div className="result__estimate">
+          <ListingRoadmap />
         </div>
       </div>
-      <Footer />
-    </>
+
+      <div className="result__suggestions">
+        <div className="result__listing">
+          {' '}
+          <ListHotels />
+        </div>
+        <div className="result__listing">
+          <ListRestaurants />
+        </div>
+        <div className="result__listing">
+          <ListStores />
+        </div>
+      </div>
+    </div>
   );
 }
 

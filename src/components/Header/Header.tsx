@@ -1,13 +1,17 @@
 import { Button, Stack } from '@mui/material';
-import { Navigate, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import LoginForm from '../Forms/Auth/LoginForm/LoginForm';
 import RegisterForm from '../Forms/Auth/RegisterForm/RegisterForm';
 import { logout } from '../../store/reducers/users';
 import './styles.scss';
-import { Link } from 'react-router-dom';
 
 function NotConnected() {
+  useEffect(() => {
+    console.log('les composants login et register se charge');
+  }, []);
   return (
     <>
       <LoginForm />
@@ -47,16 +51,14 @@ function Connected() {
 function Header() {
   const isLogged = useAppSelector((state) => state.user.isLogged);
   return (
-    <div>
-      <header className="header">
-        <div className="header__logo">
-          <Link to="/">àdeuxpas.com</Link>
-        </div>
-        <div className="header__buttons">
-          {isLogged ? <Connected /> : <NotConnected />}
-        </div>
-      </header>
-    </div>
+    <header className="header">
+      <div className="header__logo">
+        <Link to="/">àdeuxpas.com</Link>
+      </div>
+      <div className="header__buttons">
+        {isLogged ? <Connected /> : <NotConnected />}
+      </div>
+    </header>
   );
 }
 
