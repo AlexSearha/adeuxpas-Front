@@ -1,14 +1,18 @@
-import * as yup from 'yup';
+// REACT
 import { useNavigate } from 'react-router';
+// YUP & FORMIK
+import * as yup from 'yup';
+// COMPONENTS
 import MultiStepForm, { FormStep } from './StepsForm/MultiStepForm';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import AddressTextField from './FormComponents/AddressTextField';
 import CategoriesSelect from './FormComponents/CategoriesSelect';
 import SubCategoriesSelect from './FormComponents/SubCategoriesSelect';
 import DatePickerModel from './FormComponents/DatePickerModel';
 import SelectNumberField from './FormComponents/FormPropsTextFields';
 import FormDirectionsPart from './FormComponents/FormDirectionsPart';
-import { getSearchDatas } from '../../../store/reducers/search';
+// API & STORE
+import { useGetAddressListMutation } from '../../../store/rtk/rtk-address';
+// CSS
 import './style.scss';
 
 const validationSchema = yup.object({
@@ -21,11 +25,16 @@ const validationSchema = yup.object({
 });
 
 function SearchForm() {
-  const departureCoordinates = useAppSelector(
-    (state) => state.address.coordinates
-  );
+  const [, { data }] = useGetAddressListMutation({
+    fixedCacheKey: 'departureDatas',
+  });
+  const departureCoordinates = () => {
+    if (data && data?.features[0]) {
+      return data?.features[0].geometry.coordinates;
+    }
+    return null;
+  };
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   return (
     <div className="searchform-content">
@@ -40,8 +49,11 @@ function SearchForm() {
           direction: '',
         }}
         onSubmit={(values) => {
-          const result = { ...values, departureCoordinates };
-          dispatch(getSearchDatas(result));
+          const result = {
+            ...values,
+            departureCoordinates: departureCoordinates(),
+          };
+          // dispatch(getSearchDatas(result));
           console.log(result);
           navigate('/searchresults', { state: { values } });
           // alert(JSON.stringify(result, null, 2));
@@ -66,7 +78,6 @@ function SearchForm() {
             direction: yup.string().required('Choisir au moins une direction'),
           })}
           stepName="Direction"
-          // onSubmit={() => console.log()}
         >
           <FormDirectionsPart name="direction" label="Direction" />
         </FormStep>

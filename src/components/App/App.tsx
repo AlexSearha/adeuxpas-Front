@@ -11,7 +11,7 @@ import 'dayjs/locale/fr';
 
 // Import Page
 import Home from '../../pages/Home';
-import SearchResults from '../../pages/SearchResults/SearchResults';
+// import SearchResults from '../../pages/SearchResults/SearchResults';
 import ContactPage from '../../pages/Contact/ContactPage';
 import './App.scss';
 import SearchResultPage from '../../pages/SearchResultPage/SearchResultPage';
