@@ -2,6 +2,8 @@
 import { useNavigate } from 'react-router';
 // YUP & FORMIK
 import * as yup from 'yup';
+// REDUX
+import { useAppDispatch } from '../../../hooks/redux';
 // COMPONENTS
 import MultiStepForm, { FormStep } from './StepsForm/MultiStepForm';
 import AddressTextField from './FormComponents/AddressTextField';
@@ -12,11 +14,14 @@ import SelectNumberField from './FormComponents/FormPropsTextFields';
 import FormDirectionsPart from './FormComponents/FormDirectionsPart';
 // API & STORE
 import { useGetAddressListMutation } from '../../../store/rtk/rtk-address';
+import { searchStore } from '../../../store/reducers/user';
+// TYPES
+import { SearchStoreProps } from '../../../@types';
 // CSS
 import './style.scss';
 
 const validationSchema = yup.object({
-  address: yup.string().required('Une adresse est requise'),
+  addressDeparture: yup.string().required('Une adresse est requise'),
   category: yup.string().required('Choisir une categorie'),
   activity: yup.string().required('Choisir votre activité'),
   arrivalDate: yup.string().required('Choisir une date de départ'),
@@ -35,12 +40,13 @@ function SearchForm() {
     return null;
   };
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     <div className="searchform-content">
       <MultiStepForm
         initialValues={{
-          address: '',
+          addressDeparture: '',
           category: '',
           activity: '',
           arrivalDate: '',
@@ -53,18 +59,16 @@ function SearchForm() {
             ...values,
             departureCoordinates: departureCoordinates(),
           };
-          // dispatch(getSearchDatas(result));
-          console.log(result);
-          navigate('/searchresults', { state: { values } });
-          // alert(JSON.stringify(result, null, 2));
+          // console.log(result);
+          dispatch(searchStore(result as SearchStoreProps));
+          navigate('/searchresults');
         }}
       >
         <FormStep
           validationSchema={validationSchema}
           stepName="Informations de départ"
-          // onSubmit={() => console.log()}
         >
-          <AddressTextField name="address" label="Adresse" />
+          <AddressTextField name="addressDeparture" label="Adresse" />
           <CategoriesSelect name="category" label="Categorie" />
           <SubCategoriesSelect name="activity" label="Activité" />
           <div className="flex-row-center">

@@ -73,9 +73,6 @@ export function calculateCoordinatesWithAngle(startCoordinate, orientation) {
 
   return [translatedPoint1, translatedPoint2, translatedPoint3];
 }
-// Exemple de configuration :
-// const startPoint = [48.866, 2.333];
-// const orientation = 0;
 
 // Conversion pour un allé simple
 export function co2FootprintConvertor(distanceInKms) {

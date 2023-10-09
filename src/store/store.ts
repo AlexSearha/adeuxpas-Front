@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { addressGouvApi } from './rtk/rtk-address';
-import { categogiesBackEndApi } from './rtk/rtkCategories';
+import { categoriesBackEndApi } from './rtk/rtkCategories';
+import { userSearchReducer } from './reducers/user';
+import { activitiesBackEndApi } from './rtk/rtk-activities';
+import { yelpApi } from './rtk/rtk-yelp';
 
 // ...
 
@@ -9,14 +12,19 @@ export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     [addressGouvApi.reducerPath]: addressGouvApi.reducer,
-    [categogiesBackEndApi.reducerPath]: categogiesBackEndApi.reducer,
+    [categoriesBackEndApi.reducerPath]: categoriesBackEndApi.reducer,
+    [activitiesBackEndApi.reducerPath]: activitiesBackEndApi.reducer,
+    [yelpApi.reducerPath]: yelpApi.reducer,
+    userSearchReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       addressGouvApi.middleware,
-      categogiesBackEndApi.middleware
+      categoriesBackEndApi.middleware,
+      activitiesBackEndApi.middleware,
+      yelpApi.middleware
     ),
 });
 

@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react';
-import L from 'leaflet';
-import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
-import 'leaflet-routing-machine';
+// REACT
+import { useEffect } from 'react';
+// LEAFLET
 import { useMap } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet-routing-machine';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+
+// REDUX
 import { useAppSelector } from '../../../hooks/redux';
 
 L.Marker.prototype.options.icon = L.icon({
@@ -11,26 +15,25 @@ L.Marker.prototype.options.icon = L.icon({
 
 export default function MapItinerary() {
   const { departureCoordinates, arrivalCoordinates } = useAppSelector(
-    (state) => state.search
+    (state) => state.userSearchReducer
   );
   const map = useMap();
 
   useEffect(() => {
-    if (!map) return;
-
-    const routingControl = L.Routing.control({
-      language: 'fr',
-      waypoints: [
-        L.latLng(departureCoordinates[1], departureCoordinates[0]), // Depart
-        L.latLng(arrivalCoordinates[1], arrivalCoordinates[0]), // Arrivée
-      ],
-      routeWhileDragging: true,
-      height: '50px',
-      width: '50px',
-    })
-      .addTo(map)
-      .hide();
-  }, [map]);
+    if (departureCoordinates && arrivalCoordinates) {
+      if (!map) return;
+      const routingControl = L.Routing.control({
+        language: 'fr',
+        waypoints: [
+          L.latLng(departureCoordinates[1], departureCoordinates[0]), // Depart
+          L.latLng(arrivalCoordinates[1], arrivalCoordinates[0]), // Arrivée
+        ],
+        routeWhileDragging: true,
+        height: '50px',
+        width: '50px',
+      }).addTo(map);
+    }
+  }, [map, departureCoordinates, arrivalCoordinates]);
 
   return null;
 }

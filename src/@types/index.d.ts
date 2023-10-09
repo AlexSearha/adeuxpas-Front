@@ -21,6 +21,18 @@ export interface SubCategoryData {
   id: number;
 }
 
+export type ActivitiesRoot = ActivitiesMain[];
+
+export interface ActivitiesMain {
+  id: number;
+  label: string;
+  address: string;
+  latitude: string;
+  longitude: string;
+  photo: string;
+  sub_category_id: number;
+}
+
 // --------------------------------------------------- //
 // ---------------Adresse Gouv API-------------------- //
 // --------------------------------------------------- //
@@ -52,7 +64,7 @@ export interface AddressProperties {
 // ---------------Yelp API---------------------------- //
 // --------------------------------------------------- //
 
-export interface RootYelp {
+export interface YelpRoot {
   businesses: BusinessYelp;
 }
 
@@ -130,4 +142,22 @@ export interface En162582012PTVemission {
   fuelConsumption: number;
   co2eWellToWheel: number;
   energyUseWellToWheel: number;
+}
+
+// --------------------------------------------------- //
+// ---------------Reducers---------------------------- //
+// --------------------------------------------------- //
+
+export interface SearchStoreProps {
+  addressDeparture: string;
+  departureCoordinates: number[] | null;
+  departureDate: string;
+  addressArrival: ActivitiesMain | null;
+  arrivalCoordinates: number[] | null;
+  arrivalDate: string;
+  category: string;
+  activity: string;
+  voyager: number | null;
+  direction: string;
+  areaCoordinates: number[][];
 }
