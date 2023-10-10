@@ -122,7 +122,7 @@ export interface TollPTV {
 }
 
 export interface CostsPTV {
-  prices: PricePTV[];
+  convertedPrice: PricePTV;
 }
 
 export interface PricePTV {
@@ -144,6 +144,18 @@ export interface En162582012PTVemission {
   energyUseWellToWheel: number;
 }
 
+export interface CostRoot {
+  monetaryCosts: MonetaryCosts;
+  travelTime: number;
+}
+
+export interface MonetaryCosts {
+  currency: string;
+  distanceCost: number;
+  tollCost: number;
+  totalCost: number;
+}
+
 // --------------------------------------------------- //
 // ---------------Reducers---------------------------- //
 // --------------------------------------------------- //
@@ -160,4 +172,29 @@ export interface SearchStoreProps {
   voyager: number | null;
   direction: string;
   areaCoordinates: number[][];
+}
+
+// --------------------------------------------------- //
+// ---------------FUEL Cost API----------------------- //
+// --------------------------------------------------- //
+
+export type FuelCostApiRoot = FuelCostApiMain[];
+
+export interface FuelCostApiMain {
+  id: number;
+  Fuels: Fuel[];
+  LastUpdate: LastUpdate;
+}
+
+export interface Fuel {
+  id: number;
+  name: string;
+  available: boolean;
+  Price: Price;
+}
+
+export interface Price {
+  value: number;
+  currency: string;
+  text: string;
 }

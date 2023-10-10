@@ -5,6 +5,8 @@ import { categoriesBackEndApi } from './rtk/rtkCategories';
 import { userSearchReducer } from './reducers/user';
 import { activitiesBackEndApi } from './rtk/rtk-activities';
 import { yelpApi } from './rtk/rtk-yelp';
+import { ptvApi } from './rtk/rtk-ptv';
+import { fuelCostApi } from './rtk/rtk-fuelCost';
 
 // ...
 
@@ -15,6 +17,8 @@ export const store = configureStore({
     [categoriesBackEndApi.reducerPath]: categoriesBackEndApi.reducer,
     [activitiesBackEndApi.reducerPath]: activitiesBackEndApi.reducer,
     [yelpApi.reducerPath]: yelpApi.reducer,
+    [ptvApi.reducerPath]: ptvApi.reducer,
+    [fuelCostApi.reducerPath]: fuelCostApi.reducer,
     userSearchReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
@@ -24,7 +28,9 @@ export const store = configureStore({
       addressGouvApi.middleware,
       categoriesBackEndApi.middleware,
       activitiesBackEndApi.middleware,
-      yelpApi.middleware
+      yelpApi.middleware,
+      ptvApi.middleware,
+      fuelCostApi.middleware
     ),
 });
 
