@@ -147,6 +147,7 @@ export interface En162582012PTVemission {
 export interface CostRoot {
   monetaryCosts: MonetaryCosts;
   travelTime: number;
+  distance: number;
 }
 
 export interface MonetaryCosts {
