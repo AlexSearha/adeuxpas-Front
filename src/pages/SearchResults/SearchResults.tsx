@@ -1,5 +1,6 @@
 // REACT
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 // MAP & GEOLIB
 import { isPointInPolygon } from 'geolib';
 import Map from './Map/Map';
@@ -36,6 +37,7 @@ export default function SearchResults() {
   );
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // ----------------------------FUNCTIONS-------------------------------//
 
@@ -134,6 +136,14 @@ export default function SearchResults() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activitiesList]);
+
+  useEffect(() => {
+    if (!chosenOrientation) {
+      navigate('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <div className="result">

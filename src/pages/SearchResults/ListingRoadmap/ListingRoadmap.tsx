@@ -58,6 +58,7 @@ export default function ListingRoadmap() {
 
   const calculateTimeTravel = useMemo(() => {
     if (fuelCost) {
+      console.log('fuelCost.travelTime: ', fuelCost.travelTime);
       const timeLapse = dayjs.duration(fuelCost.travelTime, 'seconds');
       const hours = timeLapse.hours();
       const minutes = timeLapse.minutes();
