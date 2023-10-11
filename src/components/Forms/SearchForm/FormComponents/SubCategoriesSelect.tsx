@@ -8,10 +8,14 @@ import Select from '@mui/material/Select';
 import { FieldConfig, useField, useFormikContext } from 'formik';
 // STORE + API
 import { useGetSubCategoryMutation } from '../../../../store/rtk/rtkCategories';
-
+// TYPE
 interface Props extends FieldConfig {
   label: string;
 }
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 export default function SubCategoriesSelect({ label, ...props }: Props) {
   const [field, meta] = useField(props);
@@ -20,6 +24,8 @@ export default function SubCategoriesSelect({ label, ...props }: Props) {
   const [, { data: result }] = useGetSubCategoryMutation({
     fixedCacheKey: 'subCategoryShare',
   });
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <Box sx={{ minWidth: 120 }}>

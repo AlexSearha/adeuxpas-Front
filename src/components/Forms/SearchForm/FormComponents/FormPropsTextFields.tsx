@@ -1,13 +1,21 @@
+// MUI
 import TextField from '@mui/material/TextField';
+// FORMIK
 import { FieldConfig, useField, useFormikContext } from 'formik';
-
+// TYPE
 interface Props extends FieldConfig {
   label: string;
 }
 
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
+
 export default function SelectNumberField({ label, ...props }: Props) {
   const [field] = useField(props);
   const { setFieldValue } = useFormikContext();
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <TextField

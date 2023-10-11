@@ -30,6 +30,10 @@ const theme = createTheme({
   },
 });
 
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
+
 export default function LoginForm() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -57,6 +61,8 @@ export default function LoginForm() {
     },
   });
 
+  // ----------------------------RETURN----------------------------------//
+
   return (
     <div className="buttons">
       <Button
@@ -64,9 +70,8 @@ export default function LoginForm() {
         variant="contained"
         size="small"
         color="secondary"
-        sx={{ m: 0.5, fontSize:10}}
+        sx={{ m: 0.5, fontSize: 10 }}
         onClick={handleOpen}
-        
       >
         Se connecter
       </Button>

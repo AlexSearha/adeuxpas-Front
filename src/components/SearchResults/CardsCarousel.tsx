@@ -1,11 +1,13 @@
-import React from 'react';
+// SLIDER
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './style.scss';
+// LAYOUTS
 import SearchResultCard from './Cards/Card';
 import Images from './Images';
-
+// CSS
+import './style.scss';
+// TYPE
 interface SearchResult {
   title: string;
   description: string;
@@ -17,6 +19,10 @@ interface CardsCarouselProps {
   results: SearchResult[];
 }
 
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
+
 function CardsCarousel({ results }: CardsCarouselProps) {
   const settings = {
     dots: true,
@@ -27,6 +33,8 @@ function CardsCarousel({ results }: CardsCarouselProps) {
   };
 
   const imagesArray = Object.values(Images);
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <div className="slider">

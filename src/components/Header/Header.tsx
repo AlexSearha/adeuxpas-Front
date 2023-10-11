@@ -1,10 +1,12 @@
-import React from 'react';
+// LAYOUTS
 import LoginForm from '../Auth/LoginForm/LoginForm';
 import RegisterForm from '../Auth/RegisterForm/RegisterForm';
-// import LoginButton from '../LoginButton/LoginButton';
-// import SignUpButton from '../SignUpButton/SignUpButton';
-
+// CSS
 import './styles.scss';
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 function Header() {
   return (

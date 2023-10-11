@@ -1,8 +1,13 @@
-import React from 'react';
-import './styles.scss';
+// REACT
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+// CSS
+import './styles.scss';
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 function Footer() {
   return (
@@ -31,7 +36,7 @@ function Footer() {
                 <a href="/privacy">Confidentialité</a>
               </li>
               <li>
-              <a href="/login">Connectez-vous</a>
+                <a href="/login">Connectez-vous</a>
               </li>
             </ul>
           </div>

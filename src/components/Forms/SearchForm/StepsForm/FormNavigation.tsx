@@ -1,12 +1,18 @@
+// MUI
 import { Button } from '@mui/material';
+// FORMIK
 import { FormikValues } from 'formik';
-
+// TYPE
 interface Props {
   // eslint-disable-next-line react/require-default-props
   hasPrevious?: boolean;
   onBackClick: (values: FormikValues) => void;
   isLastStep: boolean;
 }
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 function FormNavigation({ hasPrevious, onBackClick, isLastStep }: Props) {
   return (

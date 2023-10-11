@@ -1,6 +1,10 @@
 import React from 'react';
 import ContactForm from '../../components/ContactForm/ContactForm';
 
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
+
 function ContactPage() {
   return (
     <div className="contact">

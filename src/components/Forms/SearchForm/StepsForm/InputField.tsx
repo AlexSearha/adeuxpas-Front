@@ -1,12 +1,21 @@
+// MUI
 import { TextField } from '@mui/material';
+// FORMIK
 import { FieldConfig, useField } from 'formik';
-
+// TYPE
 interface Props extends FieldConfig {
   label: string;
 }
 
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
+
 function InputField({ label, ...props }: Props) {
   const [field, meta] = useField(props);
+
+  // ----------------------------RETURN----------------------------------//
+
   return (
     <TextField
       fullWidth

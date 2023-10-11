@@ -3,11 +3,12 @@ import TextField from '@mui/material/TextField';
 import { validate } from 'email-validator';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useAppDispatch } from '../../hooks/redux';
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 export default function ContactForm() {
-  const dispatch = useAppDispatch();
-
   const formik = useFormik({
     initialValues: {
       firstname: '',
@@ -32,6 +33,9 @@ export default function ContactForm() {
       resetForm();
     },
   });
+
+  // ----------------------------RETURN----------------------------------//
+
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>

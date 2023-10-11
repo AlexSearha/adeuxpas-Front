@@ -1,23 +1,24 @@
+// MUI
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useEffect } from 'react';
+// FORMIK
 import { FieldConfig, useField, useFormikContext } from 'formik';
+// REDUX
 import {
   useGetAllCategoriesQuery,
   useGetSubCategoryMutation,
 } from '../../../../store/rtk/rtkCategories';
-
+// TYPE
 interface Props extends FieldConfig {
   label: string;
 }
 
-// interface CategoryItem {
-//   id: number;
-//   name: string;
-// }
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 export default function CategoriesSelect({ label, ...props }: Props) {
   const [field, meta] = useField(props);
@@ -28,6 +29,8 @@ export default function CategoriesSelect({ label, ...props }: Props) {
   const { data: allCategoryList, isSuccess: allCategoryIsSuccess } =
     useGetAllCategoriesQuery();
 
+  // ----------------------------FUNCTIONS------------------------------//
+
   const handleCategoryChange = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -36,6 +39,8 @@ export default function CategoriesSelect({ label, ...props }: Props) {
     console.log('selectedCategoryId: ', selectedCategoryId);
     fetchSubCategory(selectedCategoryId.toString());
   };
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <Box sx={{ minWidth: 120 }}>

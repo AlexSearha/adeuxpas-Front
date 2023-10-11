@@ -1,5 +1,11 @@
-import './styles.scss';
+// LAYOUT
 import CardsCarousel from '../../components/SearchResults/CardsCarousel';
+// CSS
+import './styles.scss';
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 function SearchResultPage() {
   const searchResults = [
@@ -18,6 +24,8 @@ function SearchResultPage() {
       id: '2',
     },
   ];
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <div className="search">

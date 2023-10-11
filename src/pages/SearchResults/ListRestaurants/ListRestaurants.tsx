@@ -1,5 +1,5 @@
 // REACT
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 // MUI
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -19,6 +19,10 @@ import { formatDistance } from '../../../utils/globalsFunctions';
 import './styles.scss';
 import Loading from '../../../components/Loading/Loading';
 
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
+
 export default function ListRestaurants() {
   const [fetchRestaurants, { data: restaurantsList, isSuccess }] =
     useGetRestaurantsListMutation();
@@ -34,6 +38,8 @@ export default function ListRestaurants() {
     slidesToScroll: 2,
   };
 
+  // ----------------------------USEEFFECTS------------------------------//
+
   useEffect(() => {
     if (activityChosen) {
       fetchRestaurants({
@@ -44,6 +50,8 @@ export default function ListRestaurants() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityChosen]);
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <>

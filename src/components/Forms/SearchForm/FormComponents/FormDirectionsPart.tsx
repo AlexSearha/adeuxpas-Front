@@ -1,4 +1,6 @@
+// REACT
 import React, { useState } from 'react';
+// MUI
 import { styled } from '@mui/material/styles';
 import Radio from '@mui/material/Radio';
 import Box from '@mui/material/Box';
@@ -8,9 +10,13 @@ import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOu
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import SignpostOutlinedIcon from '@mui/icons-material/SignpostOutlined';
 import SignpostIcon from '@mui/icons-material/Signpost';
-import { FieldConfig, useFormikContext } from 'formik';
 import { Typography } from '@mui/material';
-
+// FORMIK
+import { FieldConfig, useFormikContext } from 'formik';
+// TYPE
+interface Props extends FieldConfig {
+  label: string;
+}
 // Variable de configuration de la grid definie par MUI
 const Item = styled(Paper)(({ theme }) => ({
   // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -20,9 +26,9 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-interface Props extends FieldConfig {
-  label: string;
-}
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 export default function FormDirectionsPart({ label, ...props }: Props) {
   //
@@ -30,10 +36,13 @@ export default function FormDirectionsPart({ label, ...props }: Props) {
   const [selectedValue, setSelectedValue] = useState('');
   const { setFieldValue } = useFormikContext();
 
+  // ----------------------------FUNCTIONS------------------------------//
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedValue(event.target.value);
     setFieldValue(props.name, event.target.value);
   };
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <Box sx={{ flexGrow: 1 }}>

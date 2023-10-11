@@ -1,7 +1,12 @@
-import React from 'react';
+// LAYOUTS
 import SearchForm from '../../components/Forms/SearchForm/SearchForm';
 import Banner from '../../components/Banner/Banner';
+// CSS
 import './style.scss';
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 function Home() {
   return (

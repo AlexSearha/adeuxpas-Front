@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 // FORMIK
-import { FieldConfig, FieldProps, useField, useFormikContext } from 'formik';
+import { FieldConfig, useField, useFormikContext } from 'formik';
 // API
 import { useGetAddressListMutation } from '../../../../store/rtk/rtk-address';
 // CSS
@@ -13,6 +13,10 @@ import './style.scss';
 interface Props extends FieldConfig {
   label: string;
 }
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 export default function AddressTextField({ label, ...props }: Props) {
   const [getAddressData, { data, error, isLoading, isSuccess }] =
@@ -24,10 +28,14 @@ export default function AddressTextField({ label, ...props }: Props) {
 
   const { setFieldValue } = useFormikContext();
 
+  // ----------------------------FUNCTIONS------------------------------//
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFieldValue(field.name, event.target.value);
     getAddressData(event.target.value);
   };
+
+  // ----------------------------USEEFFECTS------------------------------//
 
   // DropDown spawn conditions
   useEffect(() => {
@@ -41,6 +49,8 @@ export default function AddressTextField({ label, ...props }: Props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, field.value]);
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <div className="address-textfield">

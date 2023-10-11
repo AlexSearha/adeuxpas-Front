@@ -30,6 +30,10 @@ const validationSchema = yup.object({
   voyager: yup.number().required('Choisir un nombre de voyageurs'),
 });
 
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
+
 function SearchForm() {
   const [, { data }] = useGetAddressListMutation({
     fixedCacheKey: 'departureDatas',
@@ -42,6 +46,8 @@ function SearchForm() {
   };
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <div className="searchform-content">

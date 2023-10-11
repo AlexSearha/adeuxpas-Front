@@ -1,5 +1,7 @@
+// REACT
 import * as React from 'react';
 import { useState } from 'react';
+// FORMIK
 import {
   Form,
   Formik,
@@ -7,15 +9,14 @@ import {
   FormikHelpers,
   FormikValues,
 } from 'formik';
-import {
-  Step,
-  StepLabel,
-  Stepper,
-  ThemeProvider,
-  createTheme,
-} from '@mui/material';
+// MUI
+import { Step, StepLabel, Stepper, createTheme } from '@mui/material';
+// COMPONENT
 import FormNavigation from './FormNavigation';
-
+// TYPE
+interface Props extends FormikConfig<FormikValues> {
+  children: React.ReactNode;
+}
 const theme = createTheme({
   palette: {
     primary: {
@@ -29,9 +30,9 @@ const theme = createTheme({
   },
 });
 
-interface Props extends FormikConfig<FormikValues> {
-  children: React.ReactNode;
-}
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 function MultiStepForm({ children, initialValues, onSubmit }: Props) {
   const [stepNumber, setStepNumber] = useState(0);
@@ -42,6 +43,8 @@ function MultiStepForm({ children, initialValues, onSubmit }: Props) {
   const step = steps[stepNumber];
   const totalSteps = steps.length;
   const isLastStep = stepNumber === totalSteps - 1;
+
+  // ----------------------------FUNCTIONS------------------------------//
 
   const next = (values: FormikValues) => {
     setSnapshot(values);
@@ -69,6 +72,9 @@ function MultiStepForm({ children, initialValues, onSubmit }: Props) {
       next(values);
     }
   };
+
+  // ----------------------------RETURN----------------------------------//
+
   return (
     <div className="searchform">
       <Formik

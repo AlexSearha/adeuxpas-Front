@@ -3,24 +3,28 @@ import { useEffect, useState } from 'react';
 // MAP & GEOLIB
 import { isPointInPolygon } from 'geolib';
 import Map from './Map/Map';
-
-import ListingRoadmap from './ListingRoadmap/ListingRoadmap';
+// REDUX
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { calculateCoordinatesWithAngle } from '../../utils/globalsFunctions';
-// COMPONENTS
-import CardActivityChosen from './CardActivityChosen/CardActivityChosen';
-import ListRestaurants from './ListRestaurants/ListRestaurants';
-import ListHotels from './ListHotels/ListeHotels';
-import ListStores from './ListStores/ListStores';
-import { ActivitiesRoot, SearchStoreProps } from '../../@types';
 import { useGetActivitiesListQuery } from '../../store/rtk/rtk-activities';
-// CSS
-import './style.scss';
 import {
   updateActivityAddress,
   updateAreaCoordinates,
   updateArrivalCoordinates,
 } from '../../store/reducers/user';
+// COMPONENTS
+import ListingRoadmap from './ListingRoadmap/ListingRoadmap';
+import CardActivityChosen from './CardActivityChosen/CardActivityChosen';
+import ListRestaurants from './ListRestaurants/ListRestaurants';
+import ListHotels from './ListHotels/ListeHotels';
+import ListStores from './ListStores/ListStores';
+import { ActivitiesRoot, SearchStoreProps } from '../../@types';
+// CSS
+import './style.scss';
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 export default function SearchResults() {
   const chosenOrientation = useAppSelector(
@@ -32,6 +36,8 @@ export default function SearchResults() {
   );
 
   const dispatch = useAppDispatch();
+
+  // ----------------------------FUNCTIONS-------------------------------//
 
   function polygonShaperToObject(list: number[][]) {
     // Mise en forme en objet des points polygon
@@ -106,6 +112,8 @@ export default function SearchResults() {
       parseFloat(randomActivitySelected.latitude),
     ];
   }
+
+  // ----------------------------USEEFFECT-------------------------------//
 
   // Dispatch Polygone généré + Dispatch coordonnées d'arrivée
   useEffect(() => {

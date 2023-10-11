@@ -1,3 +1,4 @@
+// MUI
 import { Box, Link } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,17 +10,33 @@ import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import SecurityIcon from '@mui/icons-material/Security';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-
+// CSS
 import './style.scss';
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 export default function MyAccount() {
   return (
-    <div className='myAccount'>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1.5rem', width: '100%', padding: '2rem' }}>
-      <Card className="myAccount__card" style={{ width: '100%', minWidth: '100px' }}>
+    <div className="myAccount">
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '1.5rem',
+          width: '100%',
+          padding: '2rem',
+        }}
+      >
+        <Card
+          className="myAccount__card"
+          style={{ width: '100%', minWidth: '100px' }}
+        >
           <RecentActorsIcon style={{ margin: '1rem' }} fontSize="medium" />
           <CardContent>
-            <Typography variant="h5" component="div" fontSize="medium" >
+            <Typography variant="h5" component="div" fontSize="medium">
               Informations Personnelles
             </Typography>
             <Typography color="text.secondary" fontSize="small">
@@ -32,7 +49,10 @@ export default function MyAccount() {
             </Button>
           </CardActions>
         </Card>
-        <Card className="myAccount__card" style={{ width: '100%', minWidth: '100px' }}>
+        <Card
+          className="myAccount__card"
+          style={{ width: '100%', minWidth: '100px' }}
+        >
           <FavoriteBorderIcon style={{ margin: '1rem' }} fontSize="medium" />
           <CardContent>
             <Typography variant="h5" component="div" fontSize="medium">
@@ -48,7 +68,10 @@ export default function MyAccount() {
             </Button>
           </CardActions>
         </Card>
-        <Card className="myAccount__card" style={{ width: '100%', minWidth: '100px' }}>
+        <Card
+          className="myAccount__card"
+          style={{ width: '100%', minWidth: '100px' }}
+        >
           <SecurityIcon style={{ margin: '1rem' }} fontSize="medium" />
           <CardContent>
             <Typography variant="h5" component="div" fontSize="medium">
@@ -64,7 +87,10 @@ export default function MyAccount() {
             </Button>
           </CardActions>
         </Card>
-        <Card className="myAccount__card" style={{ width: '100%', minWidth: '100px' }}>
+        <Card
+          className="myAccount__card"
+          style={{ width: '100%', minWidth: '100px' }}
+        >
           <NotificationsActiveIcon
             style={{ margin: '1rem' }}
             fontSize="medium"

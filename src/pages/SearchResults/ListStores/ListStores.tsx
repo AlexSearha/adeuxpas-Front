@@ -19,6 +19,10 @@ import { formatDistance } from '../../../utils/globalsFunctions';
 import './styles.scss';
 import Loading from '../../../components/Loading/Loading';
 
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
+
 export default function ListStores() {
   const activityChosen = useAppSelector(
     (state) => state.userSearchReducer.addressArrival
@@ -34,6 +38,8 @@ export default function ListStores() {
     slidesToScroll: 2,
   };
 
+  // ----------------------------USEEFFECTS------------------------------//
+
   useEffect(() => {
     if (activityChosen) {
       fetchStores({
@@ -44,6 +50,8 @@ export default function ListStores() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityChosen]);
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <>

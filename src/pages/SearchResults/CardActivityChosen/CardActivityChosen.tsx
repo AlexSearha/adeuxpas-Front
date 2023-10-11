@@ -1,3 +1,4 @@
+// MUI
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -5,13 +6,21 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
-import { useAppSelector } from '../../../hooks/redux';
+// LAYOUTS
 import Loading from '../../../components/Loading/Loading';
+// REDUX
+import { useAppSelector } from '../../../hooks/redux';
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 export default function CardActivityChosen() {
   const chosenActivity = useAppSelector(
     (state) => state.userSearchReducer.addressArrival
   );
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <Box>

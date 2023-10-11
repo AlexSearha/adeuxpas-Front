@@ -15,6 +15,10 @@ import './style.scss';
 
 dayjs.extend(duration);
 
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
+
 export default function ListingRoadmap() {
   const [
     fetchEmission,
@@ -33,6 +37,8 @@ export default function ListingRoadmap() {
     const data = fuelEmission?.emissions.en16258_2012.co2eWellToWheel;
     return data?.toFixed(2);
   }, [fuelEmission?.emissions.en16258_2012.co2eWellToWheel]);
+
+  // ----------------------------FUNCTIONS------------------------------//
 
   const calculateTolls = useMemo(() => {
     if (fuelCost?.monetaryCosts.tollCost) {
@@ -61,6 +67,8 @@ export default function ListingRoadmap() {
     }
     return null;
   }, [fuelCost]);
+
+  // ----------------------------USEEFFECT-------------------------------//
 
   useEffect(() => {
     if (departureCoordinates && arrivalCoordinates) {
@@ -106,6 +114,8 @@ export default function ListingRoadmap() {
       setEstimateFuelCost(parseFloat(formatDistance.toFixed(1)));
     }
   }, [fuelCostAverage, fuelCost]);
+
+  // ----------------------------RETURN-------------------------------//
 
   return (
     <div className="total">

@@ -1,22 +1,28 @@
-import { useEffect, useState } from 'react';
+// REACT
+import { useEffect } from 'react';
+// MUI
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Slider from 'react-slick';
-import { Padding } from '@mui/icons-material';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+// REDUX
 import { useAppSelector } from '../../../hooks/redux';
-import { BusinessYelp } from '../../../@types';
-
-import './styles.scss';
-
+import { useGetHotelListMutation } from '../../../store/rtk/rtk-yelp';
+// LAYOUTS
+import Loading from '../../../components/Loading/Loading';
 // Slider
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useGetHotelListMutation } from '../../../store/rtk/rtk-yelp';
+// FUNCTIONS
 import { formatDistance } from '../../../utils/globalsFunctions';
-import Loading from '../../../components/Loading/Loading';
+// CSS
+import './styles.scss';
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 export default function ListHotels() {
   const activityChosen = useAppSelector(
@@ -32,6 +38,8 @@ export default function ListHotels() {
     slidesToScroll: 2,
   };
 
+  // ----------------------------USEEFFECTS------------------------------//
+
   useEffect(() => {
     if (activityChosen) {
       fetchHotels({
@@ -42,6 +50,8 @@ export default function ListHotels() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityChosen]);
+
+  // ----------------------------RETURN----------------------------------//
 
   return (
     <>

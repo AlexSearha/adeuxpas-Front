@@ -13,15 +13,12 @@ import { validate } from 'email-validator';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { useAppDispatch } from '../../../hooks/redux';
 import './style.scss';
 
 export default function RegisterForm() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -57,6 +54,9 @@ export default function RegisterForm() {
       resetForm();
     },
   });
+
+  // ----------------------------RETURN----------------------------------//
+
   return (
     <div className="buttons">
       <Button
@@ -64,7 +64,7 @@ export default function RegisterForm() {
         variant="contained"
         size="small"
         color="secondary"
-        sx={{ m: 0.5, fontSize:10}}
+        sx={{ m: 0.5, fontSize: 10 }}
         onClick={handleOpen}
       >
         créer un compte

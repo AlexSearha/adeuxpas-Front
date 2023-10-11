@@ -1,6 +1,6 @@
-import React from 'react';
+// CSS
 import './style.scss';
-
+// TYPE
 interface SearchResult {
   title: string;
   description: string;
@@ -11,6 +11,10 @@ interface SearchResult {
 interface SearchResultCardProps {
   result: SearchResult;
 }
+
+// --------------------------------------------------------------------//
+// ----------------------------Component-------------------------------//
+// --------------------------------------------------------------------//
 
 function SearchResultCard({ result }: SearchResultCardProps) {
   const handleCardClick = () => {
