@@ -1,18 +1,27 @@
-import * as yup from 'yup';
+// REACT
 import { useNavigate } from 'react-router';
+// YUP & FORMIK
+import * as yup from 'yup';
+// REDUX
+import { useAppDispatch } from '../../../hooks/redux';
+// COMPONENTS
 import MultiStepForm, { FormStep } from './StepsForm/MultiStepForm';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import AddressTextField from './FormComponents/AddressTextField';
 import CategoriesSelect from './FormComponents/CategoriesSelect';
 import SubCategoriesSelect from './FormComponents/SubCategoriesSelect';
 import DatePickerModel from './FormComponents/DatePickerModel';
 import SelectNumberField from './FormComponents/FormPropsTextFields';
 import FormDirectionsPart from './FormComponents/FormDirectionsPart';
-import { getSearchDatas } from '../../../store/reducers/search';
+// API & STORE
+import { useGetAddressListMutation } from '../../../store/rtk/rtk-address';
+import { searchStore } from '../../../store/reducers/user';
+// TYPES
+import { SearchStoreProps } from '../../../@types';
+// CSS
 import './style.scss';
 
 const validationSchema = yup.object({
-  address: yup.string().required('Une adresse est requise'),
+  addressDeparture: yup.string().required('Une adresse est requise'),
   category: yup.string().required('Choisir une categorie'),
   activity: yup.string().required('Choisir votre activité'),
   arrivalDate: yup.string().required('Choisir une date de départ'),
@@ -21,9 +30,15 @@ const validationSchema = yup.object({
 });
 
 function SearchForm() {
-  const departureCoordinates = useAppSelector(
-    (state) => state.address.coordinates
-  );
+  const [, { data }] = useGetAddressListMutation({
+    fixedCacheKey: 'departureDatas',
+  });
+  const departureCoordinates = () => {
+    if (data && data?.features[0]) {
+      return data?.features[0].geometry.coordinates;
+    }
+    return null;
+  };
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -31,7 +46,7 @@ function SearchForm() {
     <div className="searchform-content">
       <MultiStepForm
         initialValues={{
-          address: '',
+          addressDeparture: '',
           category: '',
           activity: '',
           arrivalDate: '',
@@ -40,19 +55,20 @@ function SearchForm() {
           direction: '',
         }}
         onSubmit={(values) => {
-          const result = { ...values, departureCoordinates };
-          dispatch(getSearchDatas(result));
-          console.log(result);
-          navigate('/searchresults', { state: { values } });
-          // alert(JSON.stringify(result, null, 2));
+          const result = {
+            ...values,
+            departureCoordinates: departureCoordinates(),
+          };
+          // console.log(result);
+          dispatch(searchStore(result as SearchStoreProps));
+          navigate('/searchresults');
         }}
       >
         <FormStep
           validationSchema={validationSchema}
           stepName="Informations de départ"
-          // onSubmit={() => console.log()}
         >
-          <AddressTextField name="address" label="Adresse" />
+          <AddressTextField name="addressDeparture" label="Adresse" />
           <CategoriesSelect name="category" label="Categorie" />
           <SubCategoriesSelect name="activity" label="Activité" />
           <div className="flex-row-center">
@@ -66,7 +82,6 @@ function SearchForm() {
             direction: yup.string().required('Choisir au moins une direction'),
           })}
           stepName="Direction"
-          // onSubmit={() => console.log()}
         >
           <FormDirectionsPart name="direction" label="Direction" />
         </FormStep>

@@ -1,10 +1,14 @@
 // Convertir des degrés en radians
-function toRadians(degrees) {
+function toRadians(degrees: number) {
   return (degrees * Math.PI) / 180;
 }
 
 // Calculer les coordonnées d'un point à une distance donnée et un angle par rapport à un point initial
-function calculateCoordinates(center, distance, angle) {
+function calculateCoordinates(
+  center: [number, number],
+  distance: number,
+  angle: number
+): [number, number] {
   const [lat, lon] = center;
   const R = 6371; // Rayon de la Terre en kilomètres
 
@@ -27,7 +31,11 @@ function calculateCoordinates(center, distance, angle) {
 }
 
 // Translation des coordonnées autour d'un axe
-function translateCoordinates(point, pivot, angle) {
+function translateCoordinates(
+  point: [number, number],
+  pivot: [number, number],
+  angle: number
+) {
   const [px, py] = point;
   const [cx, cy] = pivot;
   const theta = toRadians(angle);
@@ -38,7 +46,10 @@ function translateCoordinates(point, pivot, angle) {
   return [qx, qy];
 }
 
-export function calculateCoordinatesWithAngle(startCoordinate, orientation) {
+export function calculateCoordinatesWithAngle(
+  startCoordinate: [number, number],
+  orientation: number
+) {
   const center = startCoordinate;
   // Distance de la médiane (200 km)
   const medianDistance = 200;
@@ -73,11 +84,13 @@ export function calculateCoordinatesWithAngle(startCoordinate, orientation) {
 
   return [translatedPoint1, translatedPoint2, translatedPoint3];
 }
-// Exemple de configuration :
-// const startPoint = [48.866, 2.333];
-// const orientation = 0;
 
 // Conversion pour un allé simple
-export function co2FootprintConvertor(distanceInKms) {
+export function co2FootprintConvertor(distanceInKms: number) {
   return distanceInKms * 0.17082;
+}
+
+// Conversion de metres en km et arrondir
+export function formatDistance(distance: number) {
+  return (distance / 1000).toFixed(1).toString();
 }

@@ -1,67 +1,70 @@
 // --------------------------------------------------- //
+// ---------------BackEnd API------------------------- //
+// --------------------------------------------------- //
+
+export type CategoryRoot = CategoryMain[];
+
+export interface CategoryMain {
+  id: number;
+  label: string;
+}
+
+export type SubCategoryRoot = SubCategoryMain[];
+
+export interface SubCategoryMain {
+  name: string;
+  souscategories: SubCategoryData[];
+}
+
+export interface SubCategoryData {
+  name: string;
+  id: number;
+}
+
+export type ActivitiesRoot = ActivitiesMain[];
+
+export interface ActivitiesMain {
+  id: number;
+  label: string;
+  address: string;
+  latitude: string;
+  longitude: string;
+  photo: string;
+  sub_category_id: number;
+}
+
+// --------------------------------------------------- //
 // ---------------Adresse Gouv API-------------------- //
 // --------------------------------------------------- //
-export interface Root {
-  // type: string;
-  features: Feature[];
+
+export interface AddressRoot {
+  features: AddressFeature[];
 }
 
-export interface Feature {
-  geometry: Geometry;
-  properties: Properties;
+export interface AddressFeature {
+  geometry: AddressGeometry;
+  properties: AddressProperties;
 }
 
-export interface Geometry {
+export interface AddressGeometry {
+  type: string;
   coordinates: number[];
 }
 
-export interface Coordinates {
-  longitude: number;
-  latitude: number;
-}
-
-export interface Properties {
+export interface AddressProperties {
   label: string;
   id: string;
-}
-
-// Categories
-export interface Categories {
-  id: number;
-  label: string;
-  sub_category: SubCategory[];
-}
-
-export interface SubCategory {
-  id: number;
-  label: string;
-}
-
-export interface CardProps {
-  title: string;
-  description: string;
-  imageUrl: string;
-}
-
-export interface SearchResult {
-  title: string;
-  description: string;
-  imageUrl: string;
-}
-
-interface CardsCarouselProps {
-  searchResults: CardProps[];
-}
-
-export interface AreaCoordinates {
-  areaCoordinates: number[][];
+  postcode: string;
+  x: number;
+  y: number;
+  city: string;
 }
 
 // --------------------------------------------------- //
 // ---------------Yelp API---------------------------- //
 // --------------------------------------------------- //
 
-export interface RootYelp {
+export interface YelpRoot {
   businesses: BusinessYelp;
 }
 
@@ -119,7 +122,7 @@ export interface TollPTV {
 }
 
 export interface CostsPTV {
-  prices: PricePTV[];
+  convertedPrice: PricePTV;
 }
 
 export interface PricePTV {
@@ -139,4 +142,60 @@ export interface En162582012PTVemission {
   fuelConsumption: number;
   co2eWellToWheel: number;
   energyUseWellToWheel: number;
+}
+
+export interface CostRoot {
+  monetaryCosts: MonetaryCosts;
+  travelTime: number;
+  distance: number;
+}
+
+export interface MonetaryCosts {
+  currency: string;
+  distanceCost: number;
+  tollCost: number;
+  totalCost: number;
+}
+
+// --------------------------------------------------- //
+// ---------------Reducers---------------------------- //
+// --------------------------------------------------- //
+
+export interface SearchStoreProps {
+  addressDeparture: string;
+  departureCoordinates: number[] | null;
+  departureDate: string;
+  addressArrival: ActivitiesMain | null;
+  arrivalCoordinates: number[] | null;
+  arrivalDate: string;
+  category: string;
+  activity: string;
+  voyager: number | null;
+  direction: string;
+  areaCoordinates: number[][];
+}
+
+// --------------------------------------------------- //
+// ---------------FUEL Cost API----------------------- //
+// --------------------------------------------------- //
+
+export type FuelCostApiRoot = FuelCostApiMain[];
+
+export interface FuelCostApiMain {
+  id: number;
+  Fuels: Fuel[];
+  LastUpdate: LastUpdate;
+}
+
+export interface Fuel {
+  id: number;
+  name: string;
+  available: boolean;
+  Price: Price;
+}
+
+export interface Price {
+  value: number;
+  currency: string;
+  text: string;
 }

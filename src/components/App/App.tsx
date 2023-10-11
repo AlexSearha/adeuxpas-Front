@@ -1,23 +1,20 @@
-// Import React Library
+// REACT
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-// Import MUI Stuffs
+// MUI
 import { LocalizationProvider, frFR } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ThemeProvider, createTheme } from '@mui/material';
-
-// Import DayJS
+// DayJS
 import 'dayjs/locale/fr';
-
-// Import Page
+// LAYOUTS
 import Home from '../../pages/Home';
-import SearchResults from '../../pages/SearchResults/SearchResults';
 import ContactPage from '../../pages/Contact/ContactPage';
-import './App.scss';
-import SearchResultPage from '../../pages/SearchResultPage/SearchResultPage';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import MyAccount from '../MyAccount/MyAccount';
+import SearchResults from '../../pages/SearchResults/SearchResults';
+// CSS
+import './App.scss';
 
 const theme = createTheme({
   palette: {
