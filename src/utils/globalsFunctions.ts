@@ -5,10 +5,10 @@ function toRadians(degrees: number) {
 
 // Calculer les coordonnées d'un point à une distance donnée et un angle par rapport à un point initial
 function calculateCoordinates(
-  center: [number, number],
+  center: number[],
   distance: number,
   angle: number
-): [number, number] {
+): number[] {
   const [lat, lon] = center;
   const R = 6371; // Rayon de la Terre en kilomètres
 
@@ -31,11 +31,7 @@ function calculateCoordinates(
 }
 
 // Translation des coordonnées autour d'un axe
-function translateCoordinates(
-  point: [number, number],
-  pivot: [number, number],
-  angle: number
-) {
+function translateCoordinates(point: number[], pivot: number[], angle: number) {
   const [px, py] = point;
   const [cx, cy] = pivot;
   const theta = toRadians(angle);
@@ -47,7 +43,7 @@ function translateCoordinates(
 }
 
 export function calculateCoordinatesWithAngle(
-  startCoordinate: [number, number],
+  startCoordinate: number[],
   orientation: number
 ) {
   const center = startCoordinate;

@@ -12,8 +12,6 @@ import CardActivityChosen from './CardActivityChosen/CardActivityChosen';
 import ListRestaurants from './ListRestaurants/ListRestaurants';
 import ListHotels from './ListHotels/ListeHotels';
 import ListStores from './ListStores/ListStores';
-import SearchResultCard from '../../components/SearchResults/Cards/Card';
-import Images from '../../components/SearchResults/Images';
 import { ActivitiesRoot, SearchStoreProps } from '../../@types';
 import { useGetActivitiesListQuery } from '../../store/rtk/rtk-activities';
 // CSS
@@ -23,10 +21,6 @@ import {
   updateAreaCoordinates,
   updateArrivalCoordinates,
 } from '../../store/reducers/user';
-// Slider test
-// import Slider from 'react-slick';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
 
 export default function SearchResults() {
   const chosenOrientation = useAppSelector(
@@ -73,7 +67,7 @@ export default function SearchResults() {
   }
 
   function generateOrientation(orientation: string): number[][] {
-    if (orientation !== 'R') {
+    if (orientation !== 'R' && startingCoordinates) {
       switch (orientation) {
         case 'N':
           return calculateCoordinatesWithAngle(startingCoordinates, 90);

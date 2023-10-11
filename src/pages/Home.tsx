@@ -19,7 +19,6 @@ function Home() {
             pour une expérience de voyage inoubliable alors n'attendez plus et
             laissez vous surprendre !&quot;
           </h2>
-         
         </div>
       </div>
       {/* <Footer /> */}

@@ -1,12 +1,19 @@
-import { useEffect, useState } from 'react';
-import { getDistance } from 'geolib';
+// REACT
+import { useEffect, useMemo, useState } from 'react';
+// DAYJS
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+// REDUX
 import { useAppSelector } from '../../../hooks/redux';
-import './style.scss';
+import { useGetFuelCostsMutation } from '../../../store/rtk/rtk-fuelCost';
 import {
   useGetCostMutation,
   useGetEmissionMutation,
 } from '../../../store/rtk/rtk-ptv';
-import { useGetFuelCostsMutation } from '../../../store/rtk/rtk-fuelCost';
+// CSS
+import './style.scss';
+
+dayjs.extend(duration);
 
 export default function ListingRoadmap() {
   const [
@@ -21,6 +28,39 @@ export default function ListingRoadmap() {
     useGetFuelCostsMutation();
   const [fuelCostAverage, setFuelCostAverage] = useState<number | null>(null);
   const [estimateFuelCost, setEstimateFuelCost] = useState<number | null>(null);
+
+  const caculateEmission = useMemo(() => {
+    const data = fuelEmission?.emissions.en16258_2012.co2eWellToWheel;
+    return data?.toFixed(2);
+  }, [fuelEmission?.emissions.en16258_2012.co2eWellToWheel]);
+
+  const calculateTolls = useMemo(() => {
+    if (fuelCost?.monetaryCosts.tollCost) {
+      const data = fuelCost.monetaryCosts.tollCost * 2;
+      return parseFloat(data.toFixed(1));
+    }
+    return null;
+  }, [fuelCost]);
+
+  const totalCost = useMemo(() => {
+    const toll = calculateTolls;
+    if (toll && estimateFuelCost) {
+      return toll + estimateFuelCost;
+    }
+    return null;
+  }, [calculateTolls, estimateFuelCost]);
+
+  const calculateTimeTravel = useMemo(() => {
+    if (fuelCost) {
+      const timeLapse = dayjs.duration(fuelCost.travelTime, 'seconds');
+      const hours = timeLapse.hours();
+      const minutes = timeLapse.minutes();
+      return `${hours.toString().padStart(2, '0')}h${minutes
+        .toString()
+        .padStart(2, '0')}`;
+    }
+    return null;
+  }, [fuelCost]);
 
   useEffect(() => {
     if (departureCoordinates && arrivalCoordinates) {
@@ -45,14 +85,6 @@ export default function ListingRoadmap() {
   }, [addressArrival]);
 
   useEffect(() => {
-    console.log('fuelEmission', fuelEmission);
-  }, [fuelEmission]);
-
-  useEffect(() => {
-    console.log('fuelCost', fuelCost);
-  }, [fuelCost]);
-
-  useEffect(() => {
     if (fuelCostList) {
       let testArray = 0;
       let count = 0;
@@ -70,7 +102,7 @@ export default function ListingRoadmap() {
   useEffect(() => {
     if (fuelCostAverage && fuelCost?.distance) {
       const distance = fuelCost.distance / 1000;
-      const formatDistance = (distance / 18.18) * fuelCostAverage;
+      const formatDistance = (distance / 18.18) * fuelCostAverage * 2;
       setEstimateFuelCost(parseFloat(formatDistance.toFixed(1)));
     }
   }, [fuelCostAverage, fuelCost]);
@@ -79,14 +111,12 @@ export default function ListingRoadmap() {
     <div className="total">
       <h2 className="total__title">Votre Séjour</h2>
       <h2>Coût de l&apos;essence: {estimateFuelCost} €</h2>
-      <h2>Péages: €/ Allé-Retour</h2>
-      <h2>
-        Emprunte Carbone (CO2):{' '}
-        {fuelEmission?.emissions.en16258_2012.co2eWellToWheel} kg C02{' '}
+      <h2>Péages: {calculateTolls} €/ Allé-Retour</h2>
+      <h2>Temps de trajet: {calculateTimeTravel}</h2>
+      <h2>Emprunte Carbone (CO2): {caculateEmission} kg C02 </h2>
+      <h2 className="total__estimate">
+        TOTAL estimé de votre séjour: {totalCost}€
       </h2>
-      {/* <h2 className="total__estimate">
-        TOTAL estimé de votre séjour: {parseInt((fuelConsumption + toll) * 2)}€
-      </h2> */}
     </div>
   );
 }
