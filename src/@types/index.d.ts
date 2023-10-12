@@ -158,7 +158,7 @@ export interface MonetaryCosts {
 }
 
 // --------------------------------------------------- //
-// ---------------Reducers---------------------------- //
+// ---------------User Reducer------------------------ //
 // --------------------------------------------------- //
 
 export interface SearchStoreProps {
@@ -173,6 +173,15 @@ export interface SearchStoreProps {
   voyager: number | null;
   direction: string;
   areaCoordinates: number[][];
+}
+
+export interface UserInformationsProps {
+  id: number | null;
+  email: string;
+  firstname: string;
+  lastname: string;
+  phone_number: string;
+  address: string;
 }
 
 // --------------------------------------------------- //

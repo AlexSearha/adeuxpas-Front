@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -13,8 +13,9 @@ import TextField from '@mui/material/TextField';
 import { validate } from 'email-validator';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useAppDispatch } from '../../../hooks/redux';
-import RegisterForm from '../RegisterForm/RegisterForm';
+import { usePostLoginMutation } from '../../../store/rtk/rtk-auth';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { updateUserInformations } from '../../../store/reducers/user';
 // import './style.scss';
 
 const theme = createTheme({
@@ -35,17 +36,20 @@ const theme = createTheme({
 // --------------------------------------------------------------------//
 
 export default function LoginForm() {
+  const dispatch = useAppDispatch();
+  const { id: userId } = useAppSelector(
+    (state) => state.userInformationsReducer
+  );
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  // dispatch actions
-  const dispatch = useAppDispatch();
+  const [fetchLogin, { data: dataLogin, isSuccess: isSuccessLogin }] =
+    usePostLoginMutation();
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'testest@hotmail.fr',
+      password: 'coucou',
     },
     validationSchema: Yup.object({
       email: Yup.string()
@@ -55,64 +59,101 @@ export default function LoginForm() {
     }),
     onSubmit: (values, { resetForm }) => {
       if (validate(formik.values.email)) {
-        alert(JSON.stringify(values, null, 2));
+        console.log('values: ', values);
+        fetchLogin(values);
       }
       resetForm();
     },
   });
 
+  // ----------------------------USEEFFECTS------------------------------//
+
+  useEffect(() => {
+    if (dataLogin && dataLogin.refreshToken) {
+      const userInfosToUpdate = dataLogin.userInformations;
+      dispatch(updateUserInformations(userInfosToUpdate));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataLogin]);
+
+  useEffect(() => {
+    if (userId === null) {
+      handleClose();
+    }
+  }, [userId]);
   // ----------------------------RETURN----------------------------------//
 
   return (
     <div className="buttons">
-      <Button
-        className="button"
-        variant="contained"
-        size="small"
-        color="secondary"
-        sx={{ m: 0.5, fontSize: 10 }}
-        onClick={handleOpen}
-      >
-        Se connecter
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Bonjour !</DialogTitle>
-        <DialogContent>
-          <form onSubmit={formik.handleSubmit}>
-            <Box className="register-form" sx={{ flexGrow: 1, mt: '1rem' }}>
-              <TextField
-                required
-                id="email"
-                name="email"
-                label="Email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-              />
-              <TextField
-                id="filled-password"
-                label="Mot de passe"
-                name="password"
-                type="password"
-                autoComplete="off"
-                onChange={formik.handleChange}
-                value={formik.values.password}
-                error={
-                  formik.touched.password && Boolean(formik.errors.password)
-                }
-                helperText={formik.touched.password && formik.errors.password}
-              />
-              <Button sx={{ color: 'white' }} type="submit" variant="contained">
-                se connecter{' '}
-              </Button>
-            </Box>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>annuler</Button>
-        </DialogActions>
-      </Dialog>
+      {userId ? (
+        <Button
+          className="button"
+          variant="contained"
+          size="small"
+          color="secondary"
+          sx={{ m: 0.5, fontSize: 10 }}
+          // onClick={handleOpen}
+        >
+          Mon Compte
+        </Button>
+      ) : (
+        <>
+          <Button
+            className="button"
+            variant="contained"
+            size="small"
+            color="secondary"
+            sx={{ m: 0.5, fontSize: 10 }}
+            onClick={handleOpen}
+          >
+            Connexion
+          </Button>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Bonjour !</DialogTitle>
+            <DialogContent>
+              <form onSubmit={formik.handleSubmit}>
+                <Box className="register-form" sx={{ flexGrow: 1, mt: '1rem' }}>
+                  <TextField
+                    required
+                    id="email"
+                    name="email"
+                    label="Email"
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
+                  />
+                  <TextField
+                    id="filled-password"
+                    label="Mot de passe"
+                    name="password"
+                    type="password"
+                    autoComplete="off"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    error={
+                      formik.touched.password && Boolean(formik.errors.password)
+                    }
+                    helperText={
+                      formik.touched.password && formik.errors.password
+                    }
+                  />
+                  <Button
+                    sx={{ color: 'white' }}
+                    type="submit"
+                    variant="contained"
+                  >
+                    se connecter{' '}
+                  </Button>
+                </Box>
+              </form>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>annuler</Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      )}
     </div>
   );
 }

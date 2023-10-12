@@ -4,7 +4,9 @@ import { CategoryRoot, SubCategoryMain } from '../../@types';
 // Define a service using a base URL and expected endpoints
 export const categoriesBackEndApi = createApi({
   reducerPath: 'categoriesBackEndApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:3001/',
+  }),
   endpoints: (builder) => ({
     getAllCategories: builder.query<CategoryRoot, void>({
       query: () => `category`,

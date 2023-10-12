@@ -27,5 +27,17 @@
   "cSpell.words": [
     "airbnb",
     "USEEFFECTS"
+  ],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "adeuxpas",
+      "database": "a2p",
+      "username": "alex",
+      "password": "alex"
+    }
   ]
 }
