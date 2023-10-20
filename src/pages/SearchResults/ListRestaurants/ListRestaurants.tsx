@@ -12,7 +12,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 // REDUX
 import { useAppSelector } from '../../../hooks/redux';
-import { useGetRestaurantsListMutation } from '../../../store/rtk/rtk-yelp';
+import { useGetRestaurantsListMutation } from '../../../store/queries/queries-yelp';
 // FUNCTION
 import { formatDistance } from '../../../utils/globalsFunctions';
 // CSS

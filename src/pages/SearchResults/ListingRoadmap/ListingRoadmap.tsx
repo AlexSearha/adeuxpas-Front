@@ -5,11 +5,11 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 // REDUX
 import { useAppSelector } from '../../../hooks/redux';
-import { useGetFuelCostsMutation } from '../../../store/rtk/rtk-fuelCost';
+import { useGetFuelCostsMutation } from '../../../store/queries/queries-fuelCost';
 import {
   useGetCostMutation,
   useGetEmissionMutation,
-} from '../../../store/rtk/rtk-ptv';
+} from '../../../store/queries/queries-ptv';
 // CSS
 import './style.scss';
 

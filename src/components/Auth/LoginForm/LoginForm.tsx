@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+// REACT
+import { useEffect, useState } from 'react';
+// MUI
 import {
   Box,
   Button,
@@ -10,12 +12,15 @@ import {
   createTheme,
 } from '@mui/material';
 import TextField from '@mui/material/TextField';
+// EMAIL
 import { validate } from 'email-validator';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { usePostLoginMutation } from '../../../store/rtk/rtk-auth';
+// REDUX
+import { usePostLoginMutation } from '../../../store/queries/queries-auth';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { updateUserInformations } from '../../../store/reducers/user';
+// CSS
 // import './style.scss';
 
 const theme = createTheme({

@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { addressGouvApi } from './rtk/rtk-address';
-import { categoriesBackEndApi } from './rtk/rtkCategories';
+import { addressGouvApi } from './queries/queries-address';
+import { categoriesBackEndApi } from './queries/queries-Categories';
 import { userSearchReducer, userInformationsReducer } from './reducers/user';
-import { activitiesBackEndApi } from './rtk/rtk-activities';
-import { yelpApi } from './rtk/rtk-yelp';
-import { ptvApi } from './rtk/rtk-ptv';
-import { fuelCostApi } from './rtk/rtk-fuelCost';
-import { authApi } from './rtk/rtk-auth';
+import { activitiesBackEndApi } from './queries/queries-activities';
+import { yelpApi } from './queries/queries-yelp';
+import { ptvApi } from './queries/queries-ptv';
+import { fuelCostApi } from './queries/queries-fuelCost';
+import { authApi } from './queries/queries-auth';
 
 // ...
 

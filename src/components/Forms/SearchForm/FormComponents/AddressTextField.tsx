@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 // FORMIK
 import { FieldConfig, useField, useFormikContext } from 'formik';
 // API
-import { useGetAddressListMutation } from '../../../../store/rtk/rtk-address';
+import { useGetAddressListMutation } from '../../../../store/queries/queries-address';
 // CSS
 import './style.scss';
 

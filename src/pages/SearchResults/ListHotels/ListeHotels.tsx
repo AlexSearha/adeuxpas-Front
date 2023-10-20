@@ -9,7 +9,7 @@ import Slider from 'react-slick';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 // REDUX
 import { useAppSelector } from '../../../hooks/redux';
-import { useGetHotelListMutation } from '../../../store/rtk/rtk-yelp';
+import { useGetHotelListMutation } from '../../../store/queries/queries-yelp';
 // LAYOUTS
 import Loading from '../../../components/Loading/Loading';
 // Slider

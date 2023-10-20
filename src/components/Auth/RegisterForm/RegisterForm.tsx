@@ -1,4 +1,6 @@
+// REACT
 import { useState } from 'react';
+// MUI
 import {
   Box,
   Button,
@@ -9,17 +11,19 @@ import {
   DialogTitle,
 } from '@mui/material';
 import TextField from '@mui/material/TextField';
+// EMAIL
 import { validate } from 'email-validator';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-import './style.scss';
+// REDUX
 import {
   useLazyGetLogoutQuery,
   usePostRegisterMutation,
-} from '../../../store/rtk/rtk-auth';
+} from '../../../store/queries/queries-auth';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { resetUserInformations } from '../../../store/reducers/user';
+// CSS
+import './style.scss';
 
 export default function RegisterForm() {
   const dispatch = useAppDispatch();

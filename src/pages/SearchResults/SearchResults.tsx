@@ -7,7 +7,7 @@ import Map from './Map/Map';
 // REDUX
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { calculateCoordinatesWithAngle } from '../../utils/globalsFunctions';
-import { useGetActivitiesListQuery } from '../../store/rtk/rtk-activities';
+import { useGetActivitiesListQuery } from '../../store/queries/queries-activities';
 import {
   updateActivityAddress,
   updateAreaCoordinates,

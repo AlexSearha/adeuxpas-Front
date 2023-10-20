@@ -40,6 +40,13 @@ export const authApi = createApi({
         credentials: 'include',
       }),
     }),
+    getTokenValidity: builder.query<void, void>({
+      query: () => ({
+        url: 'token-validity',
+        method: 'GET',
+        credentials: 'include',
+      }),
+    }),
   }),
 });
 
@@ -49,4 +56,5 @@ export const {
   usePostLoginMutation,
   usePostRegisterMutation,
   useLazyGetLogoutQuery,
+  useLazyGetTokenValidityQuery,
 } = authApi;
