@@ -143,8 +143,8 @@ export default function SearchResults() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // ----------------------------RETURN----------------------------------//
 
+  // ----------------------------RETURN----------------------------------//
   return (
     <div className="result">
       <div className="result__map">
