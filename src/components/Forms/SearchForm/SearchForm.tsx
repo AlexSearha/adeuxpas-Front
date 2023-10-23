@@ -14,7 +14,7 @@ import DatePickerModel from './FormComponents/DatePickerModel';
 import SelectNumberField from './FormComponents/FormPropsTextFields';
 import FormDirectionsPart from './FormComponents/FormDirectionsPart';
 // API & STORE
-import { useGetAddressListMutation } from '../../../store/rtk/rtk-address';
+import { useGetAddressListMutation } from '../../../store/queries/queries-address';
 import { searchStore } from '../../../store/reducers/user';
 // TYPES
 import { SearchStoreProps } from '../../../@types';

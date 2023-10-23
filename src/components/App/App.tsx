@@ -1,20 +1,20 @@
 // REACT
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 // MUI
 import { LocalizationProvider, frFR } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ThemeProvider, createTheme } from '@mui/material';
+// COOKIES
 // DayJS
 import 'dayjs/locale/fr';
-// LAYOUTS
-import Home from '../../pages/Home';
-import ContactPage from '../../pages/Contact/ContactPage';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import MyAccount from '../MyAccount/MyAccount';
-import SearchResults from '../../pages/SearchResults/SearchResults';
+import AppRouter from '../../routes/AppRouter';
+// REDUX
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { updateUserInformations } from '../../store/reducers/user';
+import { useLazyGetTokenValidityQuery } from '../../store/queries/queries-auth';
 // CSS
 import './App.scss';
+import { UserInformationsProps } from '../../@types';
 
 const theme = createTheme({
   palette: {
@@ -34,6 +34,34 @@ const theme = createTheme({
 // --------------------------------------------------------------------//
 
 function App() {
+  const isLogged = useAppSelector(
+    (state) => state.userInformationsReducer.isLogged
+  );
+  const [fetchTokenValidity] = useLazyGetTokenValidityQuery();
+  const dispatch = useAppDispatch();
+
+  // ----------------------------USEEFFECTS------------------------------//
+
+  useEffect(() => {
+    async function regenAccessToken() {
+      try {
+        if (!isLogged) {
+          const userInfos = await fetchTokenValidity();
+
+          dispatch(
+            updateUserInformations(
+              userInfos.data as unknown as UserInformationsProps
+            )
+          );
+        }
+      } catch (err) {
+        console.log('err: ', err);
+      }
+    }
+    regenAccessToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogged]);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -46,16 +74,7 @@ function App() {
             }
           >
             {' '}
-            <Header />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/myaccount" element={<MyAccount />} />
-                <Route path="/searchresults" element={<SearchResults />} />
-                <Route path="/contact" element={<ContactPage />} />
-              </Routes>
-            </BrowserRouter>
-            <Footer />
+            <AppRouter />
           </LocalizationProvider>
         </main>
       </div>

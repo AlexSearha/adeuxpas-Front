@@ -31,7 +31,9 @@ export default function MapItinerary() {
         routeWhileDragging: true,
         height: '50px',
         width: '50px',
-      }).addTo(map);
+      })
+        .addTo(map)
+        .hide();
     }
   }, [map, departureCoordinates, arrivalCoordinates]);
 

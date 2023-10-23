@@ -1,3 +1,5 @@
+import getAuthorizationHeaders from '../store/reducers/api';
+
 // Convertir des degrés en radians
 function toRadians(degrees: number) {
   return (degrees * Math.PI) / 180;

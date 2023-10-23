@@ -5,11 +5,11 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 // REDUX
 import { useAppSelector } from '../../../hooks/redux';
-import { useGetFuelCostsMutation } from '../../../store/rtk/rtk-fuelCost';
+import { useGetFuelCostsMutation } from '../../../store/queries/queries-fuelCost';
 import {
   useGetCostMutation,
   useGetEmissionMutation,
-} from '../../../store/rtk/rtk-ptv';
+} from '../../../store/queries/queries-ptv';
 // CSS
 import './style.scss';
 
@@ -58,6 +58,7 @@ export default function ListingRoadmap() {
 
   const calculateTimeTravel = useMemo(() => {
     if (fuelCost) {
+      console.log('fuelCost.travelTime: ', fuelCost.travelTime);
       const timeLapse = dayjs.duration(fuelCost.travelTime, 'seconds');
       const hours = timeLapse.hours();
       const minutes = timeLapse.minutes();

@@ -1,12 +1,13 @@
 // REACT
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 // MAP & GEOLIB
 import { isPointInPolygon } from 'geolib';
 import Map from './Map/Map';
 // REDUX
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { calculateCoordinatesWithAngle } from '../../utils/globalsFunctions';
-import { useGetActivitiesListQuery } from '../../store/rtk/rtk-activities';
+import { useGetActivitiesListQuery } from '../../store/queries/queries-activities';
 import {
   updateActivityAddress,
   updateAreaCoordinates,
@@ -36,6 +37,7 @@ export default function SearchResults() {
   );
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // ----------------------------FUNCTIONS-------------------------------//
 
@@ -135,6 +137,14 @@ export default function SearchResults() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activitiesList]);
 
+  useEffect(() => {
+    if (!chosenOrientation) {
+      navigate('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ----------------------------RETURN----------------------------------//
   return (
     <div className="result">
       <div className="result__map">

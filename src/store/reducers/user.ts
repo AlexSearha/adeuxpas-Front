@@ -1,7 +1,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
-import { SearchStoreProps } from '../../@types';
+import { SearchStoreProps, UserInformationsProps } from '../../@types';
 
-const initialState: SearchStoreProps = {
+const searchInitialState: SearchStoreProps = {
   addressDeparture: '',
   departureCoordinates: [],
   departureDate: '',
@@ -15,41 +15,96 @@ const initialState: SearchStoreProps = {
   areaCoordinates: [],
 };
 
-export const searchStore = createAction<SearchStoreProps>('user/searchstore');
+const userInformations: UserInformationsProps = {
+  id: null,
+  role_id: null,
+  isLogged: false,
+  email: '',
+  firstname: '',
+  lastname: '',
+  phone_number: '',
+  address: '',
+  photo: '',
+  dateofbirth: '',
+};
+
+// ----------------------USER SEARCH REDUCER---------------------- //
+
+export const searchStore = createAction<SearchStoreProps>(
+  'userSearch/searchstore'
+);
 
 export const updateAreaCoordinates = createAction<SearchStoreProps>(
-  'user/updateAreaCoordinates'
+  'userSearch/updateAreaCoordinates'
 );
 
 export const updateArrivalCoordinates = createAction<SearchStoreProps>(
-  'user/updateArrivalCoordinates'
+  'userSearch/updateArrivalCoordinates'
 );
 
 export const updateActivityAddress = createAction<SearchStoreProps>(
-  'user/updateActivityAddress'
+  'userSearch/updateActivityAddress'
 );
 
-export const userSearchReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(searchStore, (state, action) => {
-      state.addressDeparture = action.payload.addressDeparture;
-      state.departureCoordinates = action.payload.departureCoordinates;
-      state.departureDate = action.payload.departureDate;
-      state.addressArrival = action.payload.addressArrival;
-      state.arrivalCoordinates = action.payload.arrivalCoordinates;
-      state.arrivalDate = action.payload.arrivalDate;
-      state.category = action.payload.category;
-      state.activity = action.payload.activity;
-      state.voyager = action.payload.voyager;
-      state.direction = action.payload.direction;
-    })
-    .addCase(updateAreaCoordinates, (state, action) => {
-      state.areaCoordinates = action.payload.areaCoordinates;
-    })
-    .addCase(updateArrivalCoordinates, (state, action) => {
-      state.arrivalCoordinates = action.payload.arrivalCoordinates;
-    })
-    .addCase(updateActivityAddress, (state, action) => {
-      state.addressArrival = action.payload.addressArrival;
-    });
-});
+export const userSearchReducer = createReducer(
+  searchInitialState,
+  (builder) => {
+    builder
+      .addCase(searchStore, (state, action) => {
+        state.addressDeparture = action.payload.addressDeparture;
+        state.departureCoordinates = action.payload.departureCoordinates;
+        state.departureDate = action.payload.departureDate;
+        state.addressArrival = action.payload.addressArrival;
+        state.arrivalCoordinates = action.payload.arrivalCoordinates;
+        state.arrivalDate = action.payload.arrivalDate;
+        state.category = action.payload.category;
+        state.activity = action.payload.activity;
+        state.voyager = action.payload.voyager;
+        state.direction = action.payload.direction;
+      })
+      .addCase(updateAreaCoordinates, (state, action) => {
+        state.areaCoordinates = action.payload.areaCoordinates;
+      })
+      .addCase(updateArrivalCoordinates, (state, action) => {
+        state.arrivalCoordinates = action.payload.arrivalCoordinates;
+      })
+      .addCase(updateActivityAddress, (state, action) => {
+        state.addressArrival = action.payload.addressArrival;
+      });
+  }
+);
+
+// ----------------------USER INFORMATION REDUCER---------------------- //
+
+export const updateUserInformations = createAction<UserInformationsProps>(
+  'userInformations/updateUserInformations'
+);
+export const updateLoggedStatus = createAction<UserInformationsProps>(
+  'userInformations/updateLoggedStatus'
+);
+export const resetUserInformations = createAction<void>(
+  'userInformations/resetUserInformations'
+);
+
+export const userInformationsReducer = createReducer(
+  userInformations,
+  (builder) => {
+    builder
+      .addCase(updateUserInformations, (state, action) => {
+        state.id = action.payload.id;
+        state.role_id = action.payload.role_id;
+        state.email = action.payload.email;
+        state.firstname = action.payload.firstname;
+        state.lastname = action.payload.lastname;
+        state.phone_number = action.payload.phone_number;
+        state.address = action.payload.address;
+        state.photo = action.payload.photo;
+      })
+      .addCase(resetUserInformations, () => {
+        return userInformations;
+      })
+      .addCase(updateLoggedStatus, (state) => {
+        state.isLogged = !state.isLogged;
+      });
+  }
+);

@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 // FORMIK
 import { FieldConfig, useField, useFormikContext } from 'formik';
 // STORE + API
-import { useGetSubCategoryMutation } from '../../../../store/rtk/rtkCategories';
+import { useGetSubCategoryMutation } from '../../../../store/queries/queries-Categories';
 // TYPE
 interface Props extends FieldConfig {
   label: string;

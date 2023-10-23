@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { addressGouvApi } from './rtk/rtk-address';
-import { categoriesBackEndApi } from './rtk/rtkCategories';
-import { userSearchReducer } from './reducers/user';
-import { activitiesBackEndApi } from './rtk/rtk-activities';
-import { yelpApi } from './rtk/rtk-yelp';
-import { ptvApi } from './rtk/rtk-ptv';
-import { fuelCostApi } from './rtk/rtk-fuelCost';
+import { addressGouvApi } from './queries/queries-address';
+import { categoriesBackEndApi } from './queries/queries-Categories';
+import { userSearchReducer, userInformationsReducer } from './reducers/user';
+import { activitiesBackEndApi } from './queries/queries-activities';
+import { yelpApi } from './queries/queries-yelp';
+import { ptvApi } from './queries/queries-ptv';
+import { fuelCostApi } from './queries/queries-fuelCost';
+import { authApi } from './queries/queries-auth';
 
 // ...
 
@@ -18,8 +19,10 @@ export const store = configureStore({
     [activitiesBackEndApi.reducerPath]: activitiesBackEndApi.reducer,
     [yelpApi.reducerPath]: yelpApi.reducer,
     [ptvApi.reducerPath]: ptvApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
     [fuelCostApi.reducerPath]: fuelCostApi.reducer,
     userSearchReducer,
+    userInformationsReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -30,7 +33,8 @@ export const store = configureStore({
       activitiesBackEndApi.middleware,
       yelpApi.middleware,
       ptvApi.middleware,
-      fuelCostApi.middleware
+      fuelCostApi.middleware,
+      authApi.middleware
     ),
 });
 
