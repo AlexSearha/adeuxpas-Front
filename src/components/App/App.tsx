@@ -9,10 +9,12 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import 'dayjs/locale/fr';
 import AppRouter from '../../routes/AppRouter';
 // REDUX
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { updateUserInformations } from '../../store/reducers/user';
+import { useLazyGetTokenValidityQuery } from '../../store/queries/queries-auth';
 // CSS
 import './App.scss';
-import { useLazyGetTokenValidityQuery } from '../../store/queries/queries-auth';
+import { UserInformationsProps } from '../../@types';
 
 const theme = createTheme({
   palette: {
@@ -32,17 +34,33 @@ const theme = createTheme({
 // --------------------------------------------------------------------//
 
 function App() {
-  const userId = useAppSelector((state) => state.userInformationsReducer.id);
+  const isLogged = useAppSelector(
+    (state) => state.userInformationsReducer.isLogged
+  );
   const [fetchTokenValidity] = useLazyGetTokenValidityQuery();
+  const dispatch = useAppDispatch();
 
   // ----------------------------USEEFFECTS------------------------------//
 
   useEffect(() => {
-    if (!userId) {
-      fetchTokenValidity();
+    async function regenAccessToken() {
+      try {
+        if (!isLogged) {
+          const userInfos = await fetchTokenValidity();
+
+          dispatch(
+            updateUserInformations(
+              userInfos.data as unknown as UserInformationsProps
+            )
+          );
+        }
+      } catch (err) {
+        console.log('err: ', err);
+      }
     }
+    regenAccessToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  }, [isLogged]);
 
   return (
     <ThemeProvider theme={theme}>

@@ -177,11 +177,15 @@ export interface SearchStoreProps {
 
 export interface UserInformationsProps {
   id: number | null;
+  role_id: number | null;
+  isLogged: boollean;
   email: string;
   firstname: string;
   lastname: string;
   phone_number: string;
   address: string;
+  photo: string;
+  dateofbirth: string;
 }
 
 // --------------------------------------------------- //

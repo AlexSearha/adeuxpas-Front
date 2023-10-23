@@ -21,9 +21,13 @@ import {
   usePostRegisterMutation,
 } from '../../../store/queries/queries-auth';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { resetUserInformations } from '../../../store/reducers/user';
+import {
+  resetUserInformations,
+  updateLoggedStatus,
+} from '../../../store/reducers/user';
 // CSS
 import './style.scss';
+import { UserInformationsProps } from '../../../@types';
 
 export default function RegisterForm() {
   const dispatch = useAppDispatch();
@@ -73,8 +77,9 @@ export default function RegisterForm() {
 
   const handleLogOut = () => {
     handleClose();
-    dispatch(resetUserInformations());
     fetchLogout();
+    dispatch(resetUserInformations());
+    dispatch(updateLoggedStatus({} as UserInformationsProps));
   };
 
   // ----------------------------RETURN----------------------------------//

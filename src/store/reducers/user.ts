@@ -17,11 +17,15 @@ const searchInitialState: SearchStoreProps = {
 
 const userInformations: UserInformationsProps = {
   id: null,
+  role_id: null,
+  isLogged: false,
   email: '',
   firstname: '',
   lastname: '',
   phone_number: '',
   address: '',
+  photo: '',
+  dateofbirth: '',
 };
 
 // ----------------------USER SEARCH REDUCER---------------------- //
@@ -75,6 +79,9 @@ export const userSearchReducer = createReducer(
 export const updateUserInformations = createAction<UserInformationsProps>(
   'userInformations/updateUserInformations'
 );
+export const updateLoggedStatus = createAction<UserInformationsProps>(
+  'userInformations/updateLoggedStatus'
+);
 export const resetUserInformations = createAction<void>(
   'userInformations/resetUserInformations'
 );
@@ -85,14 +92,19 @@ export const userInformationsReducer = createReducer(
     builder
       .addCase(updateUserInformations, (state, action) => {
         state.id = action.payload.id;
+        state.role_id = action.payload.role_id;
         state.email = action.payload.email;
         state.firstname = action.payload.firstname;
         state.lastname = action.payload.lastname;
         state.phone_number = action.payload.phone_number;
         state.address = action.payload.address;
+        state.photo = action.payload.photo;
       })
       .addCase(resetUserInformations, () => {
         return userInformations;
+      })
+      .addCase(updateLoggedStatus, (state) => {
+        state.isLogged = !state.isLogged;
       });
   }
 );

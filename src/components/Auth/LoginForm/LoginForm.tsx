@@ -19,7 +19,11 @@ import * as Yup from 'yup';
 // REDUX
 import { usePostLoginMutation } from '../../../store/queries/queries-auth';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { updateUserInformations } from '../../../store/reducers/user';
+import {
+  updateLoggedStatus,
+  updateUserInformations,
+} from '../../../store/reducers/user';
+import { UserInformationsProps } from '../../../@types';
 // CSS
 // import './style.scss';
 
@@ -77,6 +81,7 @@ export default function LoginForm() {
     if (dataLogin && dataLogin.refreshToken) {
       const userInfosToUpdate = dataLogin.userInformations;
       dispatch(updateUserInformations(userInfosToUpdate));
+      dispatch(updateLoggedStatus({} as UserInformationsProps));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataLogin]);
