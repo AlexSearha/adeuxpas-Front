@@ -1,5 +1,6 @@
 // REACT
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 // MUI
 import {
   Box,
@@ -19,11 +20,7 @@ import * as Yup from 'yup';
 // REDUX
 import { usePostLoginMutation } from '../../../store/queries/queries-auth';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import {
-  updateLoggedStatus,
-  updateUserInformations,
-} from '../../../store/reducers/user';
-import { UserInformationsProps } from '../../../@types';
+import { updateUserInformations } from '../../../store/reducers/user';
 // CSS
 // import './style.scss';
 
@@ -45,15 +42,13 @@ const theme = createTheme({
 // --------------------------------------------------------------------//
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { id: userId } = useAppSelector(
-    (state) => state.userInformationsReducer
-  );
+  const { isLogged } = useAppSelector((state) => state.userInformationsReducer);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [fetchLogin, { data: dataLogin, isSuccess: isSuccessLogin }] =
-    usePostLoginMutation();
+  const [fetchLogin, { data: dataLogin }] = usePostLoginMutation();
 
   const formik = useFormik({
     initialValues: {
@@ -78,31 +73,33 @@ export default function LoginForm() {
   // ----------------------------USEEFFECTS------------------------------//
 
   useEffect(() => {
-    if (dataLogin && dataLogin.refreshToken) {
+    if (dataLogin) {
       const userInfosToUpdate = dataLogin.userInformations;
-      dispatch(updateUserInformations(userInfosToUpdate));
-      dispatch(updateLoggedStatus({} as UserInformationsProps));
+      console.log('userInfosToUpdate LOGIN FORM: ', userInfosToUpdate);
+      dispatch(
+        updateUserInformations({ ...userInfosToUpdate, isLogged: true })
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataLogin]);
 
   useEffect(() => {
-    if (userId === null) {
+    if (!isLogged) {
       handleClose();
     }
-  }, [userId]);
+  }, [isLogged]);
   // ----------------------------RETURN----------------------------------//
 
   return (
     <div className="buttons">
-      {userId ? (
+      {isLogged ? (
         <Button
           className="button"
           variant="contained"
           size="small"
           color="secondary"
           sx={{ m: 0.5, fontSize: 10 }}
-          // onClick={handleOpen}
+          onClick={() => navigate('/myaccount')}
         >
           Mon Compte
         </Button>

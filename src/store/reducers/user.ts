@@ -79,9 +79,6 @@ export const userSearchReducer = createReducer(
 export const updateUserInformations = createAction<UserInformationsProps>(
   'userInformations/updateUserInformations'
 );
-export const updateLoggedStatus = createAction<UserInformationsProps>(
-  'userInformations/updateLoggedStatus'
-);
 export const resetUserInformations = createAction<void>(
   'userInformations/resetUserInformations'
 );
@@ -93,6 +90,7 @@ export const userInformationsReducer = createReducer(
       .addCase(updateUserInformations, (state, action) => {
         state.id = action.payload.id;
         state.role_id = action.payload.role_id;
+        state.isLogged = action.payload.isLogged;
         state.email = action.payload.email;
         state.firstname = action.payload.firstname;
         state.lastname = action.payload.lastname;
@@ -102,9 +100,6 @@ export const userInformationsReducer = createReducer(
       })
       .addCase(resetUserInformations, () => {
         return userInformations;
-      })
-      .addCase(updateLoggedStatus, (state) => {
-        state.isLogged = !state.isLogged;
       });
   }
 );

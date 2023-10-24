@@ -1,3 +1,6 @@
+// REACT
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 // MUI
 import { Box, Link } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -10,6 +13,8 @@ import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import SecurityIcon from '@mui/icons-material/Security';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+// REDUX
+import { useAppSelector } from '../../hooks/redux';
 // CSS
 import './style.scss';
 
@@ -18,6 +23,21 @@ import './style.scss';
 // --------------------------------------------------------------------//
 
 export default function MyAccount() {
+  const isLogged = useAppSelector(
+    (state) => state.userInformationsReducer.isLogged
+  );
+  const navigate = useNavigate();
+
+  // ----------------------------USEEFFECTS------------------------------//
+
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogged]);
+
+  // ----------------------------RETURN----------------------------------//
   return (
     <div className="myAccount">
       <Box

@@ -4,17 +4,17 @@ import { useEffect } from 'react';
 import { LocalizationProvider, frFR } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ThemeProvider, createTheme } from '@mui/material';
-// COOKIES
 // DayJS
 import 'dayjs/locale/fr';
 import AppRouter from '../../routes/AppRouter';
 // REDUX
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useGetTokenValidityMutation } from '../../store/queries/queries-auth';
 import { updateUserInformations } from '../../store/reducers/user';
-import { useLazyGetTokenValidityQuery } from '../../store/queries/queries-auth';
+// TYPES
+import { UserInformationsProps } from '../../@types';
 // CSS
 import './App.scss';
-import { UserInformationsProps } from '../../@types';
 
 const theme = createTheme({
   palette: {
@@ -34,33 +34,30 @@ const theme = createTheme({
 // --------------------------------------------------------------------//
 
 function App() {
-  const isLogged = useAppSelector(
-    (state) => state.userInformationsReducer.isLogged
-  );
-  const [fetchTokenValidity] = useLazyGetTokenValidityQuery();
+  const { isLogged } = useAppSelector((state) => state.userInformationsReducer);
+  const [
+    fetchTokenValidity,
+    { data: fetchTokenDatas, isSuccess: fetchTokenSuccess },
+  ] = useGetTokenValidityMutation();
   const dispatch = useAppDispatch();
 
   // ----------------------------USEEFFECTS------------------------------//
 
   useEffect(() => {
-    async function regenAccessToken() {
-      try {
-        if (!isLogged) {
-          const userInfos = await fetchTokenValidity();
-
-          dispatch(
-            updateUserInformations(
-              userInfos.data as unknown as UserInformationsProps
-            )
-          );
-        }
-      } catch (err) {
-        console.log('err: ', err);
-      }
+    if (!isLogged) {
+      setTimeout(() => {
+        fetchTokenValidity();
+      }, 2500);
     }
-    regenAccessToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogged]);
+
+  useEffect(() => {
+    if (fetchTokenSuccess && !isLogged) {
+      dispatch(updateUserInformations({ ...fetchTokenDatas, isLogged: true }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchTokenSuccess]);
 
   return (
     <ThemeProvider theme={theme}>

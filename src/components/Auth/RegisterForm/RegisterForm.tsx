@@ -1,5 +1,6 @@
 // REACT
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 // MUI
 import {
   Box,
@@ -21,21 +22,16 @@ import {
   usePostRegisterMutation,
 } from '../../../store/queries/queries-auth';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import {
-  resetUserInformations,
-  updateLoggedStatus,
-} from '../../../store/reducers/user';
+import { resetUserInformations } from '../../../store/reducers/user';
 // CSS
 import './style.scss';
-import { UserInformationsProps } from '../../../@types';
 
 export default function RegisterForm() {
   const dispatch = useAppDispatch();
   const { id: userId } = useAppSelector(
     (state) => state.userInformationsReducer
   );
-  const [fetchRegister, { data: registerData, isSuccess: isSuccessRegister }] =
-    usePostRegisterMutation();
+  const [fetchRegister] = usePostRegisterMutation();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -76,10 +72,9 @@ export default function RegisterForm() {
   // ----------------------------FUNCTIONS------------------------------//
 
   const handleLogOut = () => {
-    handleClose();
     fetchLogout();
+    handleClose();
     dispatch(resetUserInformations());
-    dispatch(updateLoggedStatus({} as UserInformationsProps));
   };
 
   // ----------------------------RETURN----------------------------------//
