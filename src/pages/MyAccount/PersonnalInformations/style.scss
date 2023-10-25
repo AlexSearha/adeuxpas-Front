@@ -1,0 +1,21 @@
+.infos-main {
+  padding: 1rem 1.5rem;
+
+  & h2 {
+    margin-bottom: 1rem;
+  }
+
+  &__content {
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgb(228, 228, 228);
+
+    & h5 {
+      font-size: 1rem;
+    }
+  }
+}
+
+.infos-title {
+  font-style: 1.9rem;
+}
