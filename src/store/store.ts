@@ -9,6 +9,7 @@ import { ptvApi } from './queries/queries-ptv';
 import { fuelCostApi } from './queries/queries-fuelCost';
 import { authApi } from './queries/queries-auth';
 import { userBackEndApi } from './queries/queries-user';
+import { favoriteBackEndApi } from './queries/queries-favorites';
 
 // ...
 
@@ -23,6 +24,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [fuelCostApi.reducerPath]: fuelCostApi.reducer,
     [userBackEndApi.reducerPath]: userBackEndApi.reducer,
+    [favoriteBackEndApi.reducerPath]: favoriteBackEndApi.reducer,
     userSearchReducer,
     userInformationsReducer,
   },
@@ -37,7 +39,8 @@ export const store = configureStore({
       ptvApi.middleware,
       fuelCostApi.middleware,
       authApi.middleware,
-      userBackEndApi.middleware
+      userBackEndApi.middleware,
+      favoriteBackEndApi.middleware
     ),
 });
 
