@@ -75,7 +75,6 @@ export default function LoginForm() {
   useEffect(() => {
     if (dataLogin) {
       const userInfosToUpdate = dataLogin.userInformations;
-      console.log('userInfosToUpdate LOGIN FORM: ', userInfosToUpdate);
       dispatch(
         updateUserInformations({ ...userInfosToUpdate, isLogged: true })
       );

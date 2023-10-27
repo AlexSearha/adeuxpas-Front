@@ -4,8 +4,9 @@ import { FavoriteApiMain, FavoriteApiRoot } from '../../@types';
 
 interface GetOneFavoritesProps {
   userId: number;
-  favoriteId: number;
+  favoriteId?: number;
 }
+
 // Define a service using a base URL and expected endpoints
 export const favoriteBackEndApi = createApi({
   reducerPath: 'favoriteApi',
@@ -30,16 +31,16 @@ export const favoriteBackEndApi = createApi({
         credentials: 'include',
       }),
     }),
-    addOneFavorite: builder.mutation<any, any>({
+    addOneFavorite: builder.mutation<FavoriteApiMain[], FavoriteApiMain>({
       invalidatesTags: ['Favorite'],
-      query: ({ userId, ...patch }) => ({
-        url: `member/${userId}/favorite`,
+      query: ({ id, ...patch }) => ({
+        url: `member/${id}/favorite`,
         method: 'POST',
         body: patch,
         credentials: 'include',
       }),
     }),
-    deleteOneFavorite: builder.mutation<any, GetOneFavoritesProps>({
+    deleteOneFavorite: builder.mutation<void, GetOneFavoritesProps>({
       invalidatesTags: ['Favorite'],
       query: ({ userId, favoriteId }) => ({
         url: `member/${userId}/favorite/${favoriteId}`,

@@ -1,5 +1,5 @@
 // REACT
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // MUI
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -19,6 +19,7 @@ import {
   useAddOneFavoriteMutation,
   useDeleteOneFavoriteMutation,
 } from '../../../store/queries/queries-favorites';
+import { FavoriteApiMain } from '../../../@types';
 
 // --------------------------------------------------------------------//
 // ----------------------------Component-------------------------------//
@@ -48,10 +49,11 @@ export default function CardActivityChosen() {
     useDeleteOneFavoriteMutation();
 
   // ----------------------------FUNCTIONS------------------------------//
+
   const handleClickPutToFavorite = () => {
     if (userId && departureCoordinates) {
       fetchPostFavorite({
-        userId,
+        id: userId,
         address_departure: addressDeparture,
         address_destination: addressArrival?.address,
         cardinal_point: direction,
@@ -63,12 +65,12 @@ export default function CardActivityChosen() {
         category_id: category,
         activity_id: activity,
         member_id: userId,
-      });
+      } as unknown as FavoriteApiMain);
     }
   };
 
   const handleClickDeleteToFavorite = () => {
-    if (userId && fetchPostData[0].id) {
+    if (userId && fetchPostData) {
       fetchDeleteFavorite({ userId, favoriteId: fetchPostData[0].id });
     }
   };

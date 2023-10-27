@@ -8,6 +8,8 @@ import ContactPage from '../pages/Contact/ContactPage';
 import HomeLayout from '../layouts/HomeLayout/HomeLayout';
 import PersonnalsInformations from '../pages/MyAccount/PersonnalInformations/PersonnalsInformations';
 import Favoris from '../pages/MyAccount/Favoris/Favoris';
+import PageNotFound from '../pages/PageNotFound/PageNotFound';
+import NotificationsPage from '../pages/MyAccount/Notifications/NotificationsPage';
 
 // --------------------------------------------------------------------//
 // ----------------------------Component-------------------------------//
@@ -25,6 +27,10 @@ function AppRouter() {
           <Route path="/myaccount/infos" element={<PersonnalsInformations />} />
           <Route path="/myaccount/favoris" element={<Favoris />} />
           <Route
+            path="/myaccount/notifications"
+            element={<NotificationsPage />}
+          />
+          <Route
             path="/myaccount/security"
             element={<PersonnalsInformations />}
           />
@@ -32,6 +38,7 @@ function AppRouter() {
             path="/myaccount/notifications"
             element={<PersonnalsInformations />}
           />
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

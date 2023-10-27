@@ -3,20 +3,21 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 // MUI
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 // Icons
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
-import SecurityIcon from '@mui/icons-material/Security';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import SecurityIcon from '@mui/icons-material/Security';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 // REDUX
 import { useAppSelector } from '../../hooks/redux';
 // CSS
 import './style.scss';
+import DeleteAccountButton from './DeleteAccountButton/DeleteAccountButton';
 
 // --------------------------------------------------------------------//
 // ----------------------------Component-------------------------------//
@@ -30,12 +31,12 @@ export default function MyAccount() {
 
   // ----------------------------USEEFFECTS------------------------------//
 
-  // useEffect(() => {
-  //   if (!isLogged) {
-  //     navigate('/');
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isLogged]);
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogged]);
 
   // ----------------------------RETURN----------------------------------//
   return (
@@ -50,6 +51,9 @@ export default function MyAccount() {
           padding: '2rem',
         }}
       >
+        <Button variant="outlined" onClick={() => navigate('/')}>
+          Lancer une recherche
+        </Button>
         <Card
           className="myAccount__card"
           style={{ width: '100%', minWidth: '100px' }}
@@ -84,7 +88,7 @@ export default function MyAccount() {
             <Link to="/myaccount/favoris">Modifier</Link>
           </CardActions>
         </Card>
-        <Card
+        {/* <Card
           className="myAccount__card"
           style={{ width: '100%', minWidth: '100px' }}
         >
@@ -120,9 +124,9 @@ export default function MyAccount() {
           <CardActions>
             <Link to="/myaccount/notifications">Modifier</Link>
           </CardActions>
-        </Card>
+        </Card> */}
       </Box>
-      <div>Supprimer mon compte</div>
+      <DeleteAccountButton />
     </div>
   );
 }

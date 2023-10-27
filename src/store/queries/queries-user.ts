@@ -9,7 +9,7 @@ export const userBackEndApi = createApi({
   }),
   tagTypes: ['User'],
   endpoints: (builder) => ({
-    getUserInfos: builder.query<any, any>({
+    getUserInfos: builder.query<any, number>({
       providesTags: ['User'],
       query: (userId) => ({
         url: `member/${userId}`,
@@ -26,10 +26,21 @@ export const userBackEndApi = createApi({
         credentials: 'include',
       }),
     }),
+    deleteAccount: builder.mutation<void, number>({
+      invalidatesTags: ['User'],
+      query: (userId) => ({
+        url: `member/${userId}`,
+        method: 'DELETE',
+        credentials: 'include',
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { usePatchUserInfosMutation, useGetUserInfosQuery } =
-  userBackEndApi;
+export const {
+  usePatchUserInfosMutation,
+  useGetUserInfosQuery,
+  useDeleteAccountMutation,
+} = userBackEndApi;

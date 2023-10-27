@@ -2,16 +2,14 @@
 import { Link } from 'react-router-dom';
 // MUI
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-// REDUX
-import { useAppSelector } from '../../../hooks/redux';
-import {
-  useDeleteOneFavoriteMutation,
-  useGetAllFavoritesQuery,
-} from '../../../store/queries/queries-favorites';
-// CSS
-import './style.scss';
+// ICONS
 import Loading from '../../../components/Loading/Loading';
 import FavoriteCard from './FavoriteCard/FavoriteCard';
+// REDUX
+import { useAppSelector } from '../../../hooks/redux';
+import { useGetAllFavoritesQuery } from '../../../store/queries/queries-favorites';
+// CSS
+import './style.scss';
 
 // --------------------------------------------------------------------//
 // ----------------------------Component-------------------------------//
@@ -21,8 +19,6 @@ function Favoris() {
   const userId = useAppSelector((state) => state.userInformationsReducer.id);
   const { data: allFavoritesList, isLoading: allFavoritesIsLoading } =
     useGetAllFavoritesQuery(userId);
-  const [fetchDeleteFavorite, { isLoading: fetchDeleteLoading }] =
-    useDeleteOneFavoriteMutation();
 
   // ----------------------------RETURN----------------------------------//
 
