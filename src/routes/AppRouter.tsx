@@ -10,6 +10,7 @@ import PersonnalsInformations from '../pages/MyAccount/PersonnalInformations/Per
 import Favoris from '../pages/MyAccount/Favoris/Favoris';
 import PageNotFound from '../pages/PageNotFound/PageNotFound';
 import NotificationsPage from '../pages/MyAccount/Notifications/NotificationsPage';
+import ResetPasswordPage from '../pages/ResetPassword/ResetPassword';
 
 // --------------------------------------------------------------------//
 // ----------------------------Component-------------------------------//
@@ -26,6 +27,10 @@ function AppRouter() {
           <Route path="/myaccount" element={<MyAccount />} />
           <Route path="/myaccount/infos" element={<PersonnalsInformations />} />
           <Route path="/myaccount/favoris" element={<Favoris />} />
+          <Route
+            path="/reset-password/:token"
+            element={<ResetPasswordPage />}
+          />
           <Route
             path="/myaccount/notifications"
             element={<NotificationsPage />}

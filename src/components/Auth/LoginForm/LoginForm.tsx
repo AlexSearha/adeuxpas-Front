@@ -21,6 +21,7 @@ import * as Yup from 'yup';
 import { usePostLoginMutation } from '../../../store/queries/queries-auth';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { updateUserInformations } from '../../../store/reducers/user';
+import ResetPasswordModal from './ResetPasswordModal/ResetPasswordModal';
 // CSS
 // import './style.scss';
 
@@ -46,6 +47,7 @@ export default function LoginForm() {
   const dispatch = useAppDispatch();
   const { isLogged } = useAppSelector((state) => state.userInformationsReducer);
   const [open, setOpen] = useState(false);
+  const [closeModal, setCloseModal] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [fetchLogin, { data: dataLogin }] = usePostLoginMutation();
@@ -63,7 +65,6 @@ export default function LoginForm() {
     }),
     onSubmit: (values, { resetForm }) => {
       if (validate(formik.values.email)) {
-        console.log('values: ', values);
         fetchLogin(values);
       }
       resetForm();
@@ -87,6 +88,14 @@ export default function LoginForm() {
       handleClose();
     }
   }, [isLogged]);
+
+  useEffect(() => {
+    if (!closeModal && open) {
+      setOpen(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [closeModal]);
+
   // ----------------------------RETURN----------------------------------//
 
   return (
@@ -157,6 +166,7 @@ export default function LoginForm() {
             <DialogActions>
               <Button onClick={handleClose}>annuler</Button>
             </DialogActions>
+            <ResetPasswordModal setCloseModal={setCloseModal} />
           </Dialog>
         </>
       )}
