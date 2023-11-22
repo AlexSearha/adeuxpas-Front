@@ -1,6 +1,5 @@
 // REACT
 import { useNavigate } from 'react-router';
-import { useState } from 'react';
 // YUP & FORMIK
 import * as yup from 'yup';
 // REDUX

@@ -102,6 +102,7 @@ export default function SearchResults() {
 
   function mainFunction(areaPointGenerated: number[][]) {
     const polygonTest = polygonShaperToObject(areaPointGenerated);
+    console.log('polygonTest: ', polygonTest);
     const filterListByArea = isCoordinatesActivityMatch(polygonTest);
     const randomActivitySelected = randomizeAreaPoint(filterListByArea);
     dispatch(

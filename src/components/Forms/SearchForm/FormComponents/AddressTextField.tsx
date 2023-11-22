@@ -19,12 +19,12 @@ interface Props extends FieldConfig {
 // --------------------------------------------------------------------//
 
 export default function AddressTextField({ label, ...props }: Props) {
-  const [getAddressData, { data, error, isLoading, isSuccess }] =
-    useGetAddressListMutation({
-      fixedCacheKey: 'departureDatas',
-    });
-  const [isAddressesMatch, setisAddressesMatch] = useState<boolean>(false);
+  const [fetchAddress, { data, isSuccess }] = useGetAddressListMutation({
+    fixedCacheKey: 'departureDatas',
+  });
+  const [isAddressesMatch, setisAddressesMatch] = useState(false);
   const [field, meta] = useField(props);
+  const [value, setValue] = useState('');
 
   const { setFieldValue } = useFormikContext();
 
@@ -32,23 +32,30 @@ export default function AddressTextField({ label, ...props }: Props) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFieldValue(field.name, event.target.value);
-    getAddressData(event.target.value);
+    setValue(event.target.value);
   };
 
   // ----------------------------USEEFFECTS------------------------------//
+
+  useEffect(() => {
+    if (value.length > 7) {
+      fetchAddress(value);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   // DropDown spawn conditions
   useEffect(() => {
     if (data && data.features.length > 0) {
       const firstFeatureLabel = data.features[0].properties.label;
-      if (firstFeatureLabel === field.value) {
+      if (firstFeatureLabel === value || value.length < 7) {
         setisAddressesMatch(true);
       } else {
         setisAddressesMatch(false);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, field.value]);
+  }, [data, value]);
 
   // ----------------------------RETURN----------------------------------//
 

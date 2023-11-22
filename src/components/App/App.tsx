@@ -11,8 +11,6 @@ import AppRouter from '../../routes/AppRouter';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useGetTokenValidityMutation } from '../../store/queries/queries-auth';
 import { updateUserInformations } from '../../store/reducers/user';
-// TYPES
-import { UserInformationsProps } from '../../@types';
 // CSS
 import './App.scss';
 

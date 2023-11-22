@@ -6,6 +6,11 @@ import MyAccount from '../components/MyAccount/MyAccount';
 import SearchResults from '../pages/SearchResults/SearchResults';
 import ContactPage from '../pages/Contact/ContactPage';
 import HomeLayout from '../layouts/HomeLayout/HomeLayout';
+import PersonnalsInformations from '../pages/MyAccount/PersonnalInformations/PersonnalsInformations';
+import Favoris from '../pages/MyAccount/Favoris/Favoris';
+import PageNotFound from '../pages/PageNotFound/PageNotFound';
+import NotificationsPage from '../pages/MyAccount/Notifications/NotificationsPage';
+import ResetPasswordPage from '../pages/ResetPassword/ResetPassword';
 
 // --------------------------------------------------------------------//
 // ----------------------------Component-------------------------------//
@@ -18,8 +23,27 @@ function AppRouter() {
         <Route path="/" element={<HomeLayout />}>
           <Route index element={<Home />} />
           <Route path="/searchresults" element={<SearchResults />} />
-          <Route path="/myaccount" element={<MyAccount />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/myaccount" element={<MyAccount />} />
+          <Route path="/myaccount/infos" element={<PersonnalsInformations />} />
+          <Route path="/myaccount/favoris" element={<Favoris />} />
+          <Route
+            path="/reset-password/:token"
+            element={<ResetPasswordPage />}
+          />
+          <Route
+            path="/myaccount/notifications"
+            element={<NotificationsPage />}
+          />
+          <Route
+            path="/myaccount/security"
+            element={<PersonnalsInformations />}
+          />
+          <Route
+            path="/myaccount/notifications"
+            element={<PersonnalsInformations />}
+          />
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

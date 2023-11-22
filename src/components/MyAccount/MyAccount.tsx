@@ -1,22 +1,23 @@
 // REACT
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 // MUI
-import { Box, Link } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 // Icons
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
-import SecurityIcon from '@mui/icons-material/Security';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import SecurityIcon from '@mui/icons-material/Security';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 // REDUX
 import { useAppSelector } from '../../hooks/redux';
 // CSS
 import './style.scss';
+import DeleteAccountButton from './DeleteAccountButton/DeleteAccountButton';
 
 // --------------------------------------------------------------------//
 // ----------------------------Component-------------------------------//
@@ -50,13 +51,16 @@ export default function MyAccount() {
           padding: '2rem',
         }}
       >
+        <Button variant="outlined" onClick={() => navigate('/')}>
+          Lancer une recherche
+        </Button>
         <Card
           className="myAccount__card"
           style={{ width: '100%', minWidth: '100px' }}
         >
-          <RecentActorsIcon style={{ margin: '1rem' }} fontSize="medium" />
+          <RecentActorsIcon style={{ margin: '1rem' }} fontSize="large" />
           <CardContent>
-            <Typography variant="h5" component="div" fontSize="medium">
+            <Typography variant="h5" component="div" fontSize="large">
               Informations Personnelles
             </Typography>
             <Typography color="text.secondary" fontSize="small">
@@ -64,18 +68,16 @@ export default function MyAccount() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" href="https://www.google.com" target="_blank">
-              Modifier
-            </Button>
+            <Link to="/myaccount/infos">Modifier</Link>
           </CardActions>
         </Card>
         <Card
           className="myAccount__card"
           style={{ width: '100%', minWidth: '100px' }}
         >
-          <FavoriteBorderIcon style={{ margin: '1rem' }} fontSize="medium" />
+          <FavoriteBorderIcon style={{ margin: '1rem' }} fontSize="large" />
           <CardContent>
-            <Typography variant="h5" component="div" fontSize="medium">
+            <Typography variant="h5" component="div" fontSize="large">
               Favoris
             </Typography>
             <Typography color="text.secondary" fontSize="small">
@@ -83,18 +85,16 @@ export default function MyAccount() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" href="https://www.google.com" target="_blank">
-              Modifier
-            </Button>
+            <Link to="/myaccount/favoris">Modifier</Link>
           </CardActions>
         </Card>
-        <Card
+        {/* <Card
           className="myAccount__card"
           style={{ width: '100%', minWidth: '100px' }}
         >
-          <SecurityIcon style={{ margin: '1rem' }} fontSize="medium" />
+          <SecurityIcon style={{ margin: '1rem' }} fontSize="large" />
           <CardContent>
-            <Typography variant="h5" component="div" fontSize="medium">
+            <Typography variant="h5" component="div" fontSize="large">
               Connexion et Sécurité
             </Typography>
             <Typography color="text.secondary" fontSize="small">
@@ -102,9 +102,7 @@ export default function MyAccount() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" href="https://www.google.com" target="_blank">
-              Modifier
-            </Button>
+            <Link to="/myaccount/security">Modifier</Link>
           </CardActions>
         </Card>
         <Card
@@ -113,10 +111,10 @@ export default function MyAccount() {
         >
           <NotificationsActiveIcon
             style={{ margin: '1rem' }}
-            fontSize="medium"
+            fontSize="large"
           />
           <CardContent>
-            <Typography variant="h5" component="div" fontSize="medium">
+            <Typography variant="h5" component="div" fontSize="large">
               Notifications
             </Typography>
             <Typography color="text.secondary" fontSize="small">
@@ -124,20 +122,11 @@ export default function MyAccount() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" href="https://www.google.com" target="_blank">
-              Modifier
-            </Button>
+            <Link to="/myaccount/notifications">Modifier</Link>
           </CardActions>
-        </Card>
+        </Card> */}
       </Box>
-      <Link
-        href="https://www.google.com"
-        target="_blank"
-        underline="hover"
-        sx={{ textAlign: 'center' }}
-      >
-        Supprimer mon compte
-      </Link>
+      <DeleteAccountButton />
     </div>
   );
 }

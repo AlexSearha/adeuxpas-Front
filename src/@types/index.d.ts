@@ -212,3 +212,26 @@ export interface Price {
   currency: string;
   text: string;
 }
+
+// --------------------------------------------------- //
+// ---------------Favorite API------------------------ //
+// --------------------------------------------------- //
+
+export type FavoriteApiRoot = FavoriteApiMain[];
+
+export interface FavoriteApiMain {
+  id: number;
+  address_departure: string;
+  address_destination: string | undefined;
+  cardinal_point: string;
+  gps_latitude: string | undefined;
+  gps_longitude: string | undefined;
+  date_of_arrival: string;
+  date_of_departure: string;
+  created_at: string;
+  updated_at: string | null;
+  category_id: string;
+  sub_category_id: number | undefined;
+  activity_id: string;
+  member_id: number;
+}

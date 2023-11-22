@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { addressGouvApi } from './queries/queries-address';
-import { categoriesBackEndApi } from './queries/queries-Categories';
+import { categoriesBackEndApi } from './queries/queries-categories';
 import { userSearchReducer, userInformationsReducer } from './reducers/user';
 import { activitiesBackEndApi } from './queries/queries-activities';
 import { yelpApi } from './queries/queries-yelp';
 import { ptvApi } from './queries/queries-ptv';
 import { fuelCostApi } from './queries/queries-fuelCost';
 import { authApi } from './queries/queries-auth';
+import { userBackEndApi } from './queries/queries-user';
+import { favoriteBackEndApi } from './queries/queries-favorites';
 
 // ...
 
@@ -21,6 +23,8 @@ export const store = configureStore({
     [ptvApi.reducerPath]: ptvApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [fuelCostApi.reducerPath]: fuelCostApi.reducer,
+    [userBackEndApi.reducerPath]: userBackEndApi.reducer,
+    [favoriteBackEndApi.reducerPath]: favoriteBackEndApi.reducer,
     userSearchReducer,
     userInformationsReducer,
   },
@@ -34,7 +38,9 @@ export const store = configureStore({
       yelpApi.middleware,
       ptvApi.middleware,
       fuelCostApi.middleware,
-      authApi.middleware
+      authApi.middleware,
+      userBackEndApi.middleware,
+      favoriteBackEndApi.middleware
     ),
 });
 
