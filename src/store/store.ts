@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { addressGouvApi } from './queries/queries-address';
-import { categoriesBackEndApi } from './queries/queries-Categories';
+import { categoriesBackEndApi } from './queries/queries-categories';
 import { userSearchReducer, userInformationsReducer } from './reducers/user';
 import { activitiesBackEndApi } from './queries/queries-activities';
 import { yelpApi } from './queries/queries-yelp';

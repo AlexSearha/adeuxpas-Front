@@ -22,6 +22,7 @@ import { usePostLoginMutation } from '../../../store/queries/queries-auth';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { updateUserInformations } from '../../../store/reducers/user';
 import ResetPasswordModal from './ResetPasswordModal/ResetPasswordModal';
+import { AlertError } from '../../Alert/AlertBox';
 // CSS
 // import './style.scss';
 
@@ -50,7 +51,9 @@ export default function LoginForm() {
   const [closeModal, setCloseModal] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [fetchLogin, { data: dataLogin }] = usePostLoginMutation();
+  const [errorLoginMessage, setErrorLoginMessage] = useState('');
+  const [fetchLogin, { data: dataLogin, isError: fetchLoginError }] =
+    usePostLoginMutation();
 
   const formik = useFormik({
     initialValues: {
@@ -96,6 +99,12 @@ export default function LoginForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [closeModal]);
 
+  useEffect(() => {
+    if (fetchLoginError) {
+      setErrorLoginMessage('Votre email/mot de passe est incorrect');
+    }
+  }, [fetchLoginError]);
+
   // ----------------------------RETURN----------------------------------//
 
   return (
@@ -124,7 +133,7 @@ export default function LoginForm() {
             Connexion
           </Button>
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Bonjour !</DialogTitle>
+            <DialogTitle>Connexion</DialogTitle>
             <DialogContent>
               <form onSubmit={formik.handleSubmit}>
                 <Box className="register-form" sx={{ flexGrow: 1, mt: '1rem' }}>
@@ -160,6 +169,9 @@ export default function LoginForm() {
                   >
                     se connecter{' '}
                   </Button>
+                  {fetchLoginError && (
+                    <AlertError message={errorLoginMessage} />
+                  )}
                 </Box>
               </form>
             </DialogContent>

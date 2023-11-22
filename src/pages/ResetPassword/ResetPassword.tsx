@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 // MUI
 import { Button, TextField } from '@mui/material';
-import { AlertSuccess } from '../../components/Alert/AlertBox';
+import { AlertError, AlertSuccess } from '../../components/Alert/AlertBox';
 import { usePatchResetPasswordMutation } from '../../store/queries/queries-auth';
+import Loading from '../../components/Loading/Loading';
 // INTERFACES
 interface DataProps {
   password: string;
@@ -17,14 +18,19 @@ interface DataProps {
 
 export default function ResetPasswordPage() {
   const { token } = useParams();
-  const [passwordValue, setPasswordValue] = useState<string>('');
-  const [checkPasswordValue, setCheckPasswordValue] = useState<string>('');
-  const [errorState, setErrorState] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const [successMessage, setSuccessMessage] = useState<string>('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [checkPasswordValue, setCheckPasswordValue] = useState('');
+  const [errorState, setErrorState] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [fetchErrorMessage, setFetchErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [
     fetchResetPassword,
-    { isLoading: fetchResetIsLoading, isSuccess: fetchResetIsSuccess },
+    {
+      isLoading: fetchResetIsLoading,
+      isSuccess: fetchResetIsSuccess,
+      isError: fetchResetIsError,
+    },
   ] = usePatchResetPasswordMutation();
   const navigate = useNavigate();
 
@@ -32,20 +38,19 @@ export default function ResetPasswordPage() {
 
   const handleSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data: DataProps = {
-      password: passwordValue,
-      token,
-    };
     try {
-      const result = await fetchResetPassword(data);
-      if (result) {
-        setSuccessMessage(
-          'Votre mot de passe à été modifier, veuillez vous identifier'
+      const bothPasswords = passwordValue || checkPasswordValue;
+      if (bothPasswords.length === 0) {
+        setErrorMessage(
+          `Les mots de passe doivent être au moins de 8 characteres`
         );
-        setTimeout(() => {
-          navigate('/connexion');
-        }, 5000);
+        return;
       }
+      const data: DataProps = {
+        password: passwordValue,
+        token,
+      };
+      await fetchResetPassword(data);
     } catch (error) {
       console.log('error: ', error);
     }
@@ -76,6 +81,22 @@ export default function ResetPasswordPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkPasswordValue, passwordValue]);
 
+  useEffect(() => {
+    if (fetchResetIsSuccess) {
+      setSuccessMessage(
+        'Votre mot de passe à été modifier, veuillez vous identifier'
+      );
+      setTimeout(() => {
+        navigate('/');
+      }, 5000);
+    } else if (fetchResetIsError) {
+      setFetchErrorMessage(
+        'Le delai de modification de votre mot de passe est expiré, veuillez reitérer votre demande'
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchResetIsSuccess, fetchResetIsError]);
+
   // ----------------------------RETURN----------------------------------//
 
   return (
@@ -87,6 +108,7 @@ export default function ResetPasswordPage() {
         value={passwordValue}
         inputProps={{ minLength: 8 }}
         onChange={handleChange}
+        onFocus={handleFocus}
       />
       <TextField
         type="password"
@@ -101,7 +123,9 @@ export default function ResetPasswordPage() {
       <Button variant="contained" type="submit">
         Reinitialiser
       </Button>
-      <AlertSuccess message={successMessage} />
+      {fetchResetIsSuccess && <AlertSuccess message={successMessage} />}
+      {fetchResetIsLoading && <Loading />}
+      {fetchResetIsError && <AlertError message={fetchErrorMessage} />}
     </form>
   );
 }

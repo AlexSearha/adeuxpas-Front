@@ -7,9 +7,8 @@ interface GetLoginPost {
   password: string;
 }
 interface ResetPasswordPatch {
-  email: string;
-  role_id: number;
-  id: number;
+  password: string;
+  token: string | undefined;
 }
 interface LoginDatas {
   refreshToken: string;
@@ -62,13 +61,12 @@ export const authApi = createApi({
     }),
     patchResetPassword: builder.mutation<void, ResetPasswordPatch>({
       query: (body) => ({
-        url: 'reset-password',
+        url: 'change-password',
         method: 'PATCH',
         credentials: 'include',
         body: {
-          email: body.email,
-          role_id: body.role_id,
-          id: body.id,
+          password: body.password,
+          token: body.token,
         },
       }),
     }),

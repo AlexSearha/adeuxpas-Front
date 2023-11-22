@@ -10,7 +10,7 @@ import { FieldConfig, useField, useFormikContext } from 'formik';
 import {
   useGetAllCategoriesQuery,
   useGetSubCategoryMutation,
-} from '../../../../store/queries/queries-Categories';
+} from '../../../../store/queries/queries-categories';
 // TYPE
 interface Props extends FieldConfig {
   label: string;
