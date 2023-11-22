@@ -1,6 +1,5 @@
 // REACT
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 // MUI
 import {
   Box,
@@ -25,13 +24,22 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { resetUserInformations } from '../../../store/reducers/user';
 // CSS
 import './style.scss';
+import { AlertError, AlertSuccess } from '../../Alert/AlertBox';
+import Loading from '../../Loading/Loading';
 
 export default function RegisterForm() {
   const dispatch = useAppDispatch();
   const { id: userId } = useAppSelector(
     (state) => state.userInformationsReducer
   );
-  const [fetchRegister] = usePostRegisterMutation();
+  const [
+    fetchRegister,
+    {
+      isError: fetchRegisterIsError,
+      isLoading: fetchRegisterIsLoading,
+      isSuccess: fetchRegisterIsSuccess,
+    },
+  ] = usePostRegisterMutation();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -77,6 +85,16 @@ export default function RegisterForm() {
     dispatch(resetUserInformations());
   };
 
+  // ----------------------------USEEFFECTS------------------------------//
+
+  useEffect(() => {
+    if (fetchRegisterIsSuccess) {
+      setTimeout(() => {
+        setOpen(false);
+      }, 5000);
+    }
+  }, [fetchRegisterIsSuccess]);
+
   // ----------------------------RETURN----------------------------------//
 
   return (
@@ -108,7 +126,7 @@ export default function RegisterForm() {
             <DialogTitle>Créer votre compte</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Et si on faisait connaissance ?
+                Remplissez le formulaire ci-dessous pour vous inscrire:
               </DialogContentText>
               <form onSubmit={formik.handleSubmit}>
                 <Box className="register-form" sx={{ flexGrow: 1, mt: '1rem' }}>
@@ -175,6 +193,13 @@ export default function RegisterForm() {
                   >
                     se connecter{' '}
                   </Button>
+                  {fetchRegisterIsError && (
+                    <AlertError message="Erreur, veuillez recommencer" />
+                  )}
+                  {fetchRegisterIsLoading && <Loading />}
+                  {fetchRegisterIsSuccess && (
+                    <AlertSuccess message="Votre compte est enregistré, veuillez vous identifier" />
+                  )}
                 </Box>
               </form>
             </DialogContent>
