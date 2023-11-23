@@ -1,5 +1,5 @@
 // REACT
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // MUI
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -27,6 +27,9 @@ import { FavoriteApiMain } from '../../../@types';
 
 export default function CardActivityChosen() {
   const [isFavorite, setIsFavorite] = useState(false);
+  const isUserLogged = useAppSelector(
+    (state) => state.userInformationsReducer.isLogged
+  );
   const chosenActivity = useAppSelector(
     (state) => state.userSearchReducer.addressArrival
   );
@@ -84,6 +87,7 @@ export default function CardActivityChosen() {
       setIsFavorite(true);
     }
   };
+
   // ----------------------------RETURN----------------------------------//
 
   return (

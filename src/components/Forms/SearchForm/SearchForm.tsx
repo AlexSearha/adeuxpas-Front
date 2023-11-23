@@ -65,7 +65,6 @@ function SearchForm() {
             ...values,
             departureCoordinates: departureCoordinates(),
           };
-          // console.log(result);
           dispatch(searchStore(result as SearchStoreProps));
           navigate('/searchresults');
         }}
