@@ -44,8 +44,6 @@ export default function DeleteAccountButton() {
   // ----------------------------USEEFFECTS------------------------------//
 
   useEffect(() => {
-    console.log('isSuccess: ', isSuccess);
-    console.log('isError: ', isError);
     if (isSuccess) {
       setTimeout(() => {
         fetchlogout();

@@ -5,6 +5,7 @@ import { FavoriteApiMain, FavoriteApiRoot } from '../../@types';
 interface GetOneFavoritesProps {
   userId: number;
   favoriteId?: number;
+  favoriteAddress?: string;
 }
 
 // Define a service using a base URL and expected endpoints
@@ -21,6 +22,15 @@ export const favoriteBackEndApi = createApi({
         url: `member/${userId}/favorite`,
         method: 'GET',
         credentials: 'include',
+      }),
+    }),
+    getFavoriteAddress: builder.query<FavoriteApiMain, GetOneFavoritesProps>({
+      providesTags: ['Favorite'],
+      query: ({ userId, favoriteAddress }) => ({
+        url: `member/${userId}/favoriteAddress`,
+        method: 'POST',
+        credentials: 'include',
+        body: { address_destination: favoriteAddress },
       }),
     }),
     getOneFavorite: builder.query<FavoriteApiMain, GetOneFavoritesProps>({
@@ -58,4 +68,5 @@ export const {
   useGetOneFavoriteQuery,
   useAddOneFavoriteMutation,
   useDeleteOneFavoriteMutation,
+  useLazyGetFavoriteAddressQuery,
 } = favoriteBackEndApi;
