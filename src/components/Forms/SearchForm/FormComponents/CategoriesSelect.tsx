@@ -36,7 +36,6 @@ export default function CategoriesSelect({ label, ...props }: Props) {
   ) => {
     const selectedCategoryId = event.target.value as number;
     setFieldValue(props.name, selectedCategoryId);
-    console.log('selectedCategoryId: ', selectedCategoryId);
     fetchSubCategory(selectedCategoryId.toString());
   };
 
