@@ -14,7 +14,7 @@ import { useAppSelector } from '../../../../hooks/redux';
 import { ActivitiesMain, FavoriteApiMain } from '../../../../@types';
 
 // INTERFACE
-interface Props {
+interface FavoriteButtonProps {
   chosenActivity: ActivitiesMain;
 }
 
@@ -22,9 +22,13 @@ interface Props {
 // ----------------------------Component-------------------------------//
 // --------------------------------------------------------------------//
 
-export default function FavoriteButton({ chosenActivity }: Props) {
-  const [getFavoriteAddress, { data, isSuccess: getFavoriteAddressIsSuccess }] =
-    useLazyGetFavoriteAddressQuery();
+export default function FavoriteButton({
+  chosenActivity,
+}: FavoriteButtonProps) {
+  const [
+    getFavoriteAddress,
+    { data: getFavoriteAddressData, isSuccess: getFavoriteAddressIsSuccess },
+  ] = useLazyGetFavoriteAddressQuery();
   const [isFavoriteExist, setIsFavoriteExist] = useState(false);
   const userId = useAppSelector((state) => state.userInformationsReducer.id);
   const {
@@ -37,15 +41,13 @@ export default function FavoriteButton({ chosenActivity }: Props) {
     category,
     activity,
   } = useAppSelector((state) => state.userSearchReducer);
-  const [fetchPostFavorite, { data: fetchPostData }] =
-    useAddOneFavoriteMutation();
+  const [fetchPostFavorite] = useAddOneFavoriteMutation();
   const [fetchDeleteFavorite] = useDeleteOneFavoriteMutation();
 
   // ----------------------------FUNCTIONS------------------------------//
 
   const handleClickPutToFavorite = () => {
     if (userId && departureCoordinates) {
-      console.log('handleClickPut');
       fetchPostFavorite({
         id: userId,
         address_departure: addressDeparture,
@@ -64,23 +66,16 @@ export default function FavoriteButton({ chosenActivity }: Props) {
   };
 
   const handleClickDeleteToFavorite = () => {
-    if (userId && fetchPostData) {
-      console.log('handleClickDelete');
-      console.log('userId: ', userId);
-      console.log('fetchPostData[0].id', fetchPostData[0].id);
-
-      fetchDeleteFavorite({ userId, favoriteId: fetchPostData[0].id });
+    if (userId && getFavoriteAddressData?.id) {
+      fetchDeleteFavorite({ userId, favoriteId: getFavoriteAddressData.id });
     }
   };
 
   const handleToggleFavorite = () => {
     if (isFavoriteExist) {
-      console.log('DELETE');
       handleClickDeleteToFavorite();
       setIsFavoriteExist(false);
     } else {
-      console.log('PUT');
-
       handleClickPutToFavorite();
       setIsFavoriteExist(true);
     }
@@ -90,27 +85,17 @@ export default function FavoriteButton({ chosenActivity }: Props) {
 
   useEffect(() => {
     if (userId) {
-      console.log('GET Favorite Address');
-
       getFavoriteAddress({ userId, favoriteAddress: addressArrival?.address });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   useEffect(() => {
-    if (getFavoriteAddressIsSuccess && data !== null) {
-      console.log('Resultat du fetch favoris: ', data);
-
+    if (getFavoriteAddressIsSuccess && getFavoriteAddressData !== null) {
       setIsFavoriteExist(true);
     }
-    console.log('Resultat du fetch favoris: ', data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getFavoriteAddressIsSuccess]);
-
-  useEffect(() => {
-    console.log('isFavoriteExist: ', isFavoriteExist);
-    console.log('fetchPostData: ', fetchPostData);
-  }, [isFavoriteExist]);
 
   // ----------------------------RETURN----------------------------------//
 
