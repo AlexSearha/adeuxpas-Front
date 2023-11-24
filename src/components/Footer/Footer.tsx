@@ -4,20 +4,26 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 // CSS
 import './styles.scss';
+import { useAppSelector } from '../../hooks/redux';
 
 // --------------------------------------------------------------------//
 // ----------------------------Component-------------------------------//
 // --------------------------------------------------------------------//
 
 function Footer() {
+  const isLogged = useAppSelector(
+    (state) => state.userInformationsReducer.isLogged
+  );
   return (
     <footer className="footer">
       <div className="footer__navigation">
         <div className="footer__links-left">
           <ul>
-            <li>
-              <a href="/wishlist">Ma wishlist</a>
-            </li>
+            {isLogged ? (
+              <li>
+                <a href="/wishlist">Ma wishlist</a>
+              </li>
+            ) : null}
             <li>
               <a href="/contact">Contact</a>
             </li>
@@ -33,9 +39,6 @@ function Footer() {
             </li>
             <li>
               <a href="/privacy">Confidentialité</a>
-            </li>
-            <li>
-              <a href="/login">Connectez-vous</a>
             </li>
           </ul>
         </div>

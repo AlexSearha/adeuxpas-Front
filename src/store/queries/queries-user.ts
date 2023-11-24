@@ -1,5 +1,6 @@
 // Need to use the React-specific entry point to allow generating React hooks
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ContactForm } from '../../@types';
 
 // Define a service using a base URL and expected endpoints
 export const userBackEndApi = createApi({
@@ -34,6 +35,14 @@ export const userBackEndApi = createApi({
         credentials: 'include',
       }),
     }),
+    sendEmailContactForm: builder.query<void, ContactForm>({
+      query: (body) => ({
+        url: `contact`,
+        method: 'POST',
+        credentials: 'include',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -43,4 +52,5 @@ export const {
   usePatchUserInfosMutation,
   useGetUserInfosQuery,
   useDeleteAccountMutation,
+  useLazySendEmailContactFormQuery,
 } = userBackEndApi;

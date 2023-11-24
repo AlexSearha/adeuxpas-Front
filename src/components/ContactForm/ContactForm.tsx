@@ -1,14 +1,21 @@
+// MUI
 import { Box, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { validate } from 'email-validator';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+// COMPONENTS
+import { useLazySendEmailContactFormQuery } from '../../store/queries/queries-user';
+import Loading from '../Loading/Loading';
+import { AlertError, AlertSuccess } from '../Alert/AlertBox';
 
 // --------------------------------------------------------------------//
 // ----------------------------Component-------------------------------//
 // --------------------------------------------------------------------//
 
 export default function ContactForm() {
+  const [fetchSendEmail, { isLoading, isError, isSuccess }] =
+    useLazySendEmailContactFormQuery();
   const formik = useFormik({
     initialValues: {
       firstname: '',
@@ -24,11 +31,7 @@ export default function ContactForm() {
     }),
     onSubmit: (values, { resetForm }) => {
       if (validate(formik.values.email)) {
-        alert(JSON.stringify(values, null, 2));
-      } else {
-        alert(
-          'Veuillez corriger les erreurs avant de soumettre le formulaire.'
-        );
+        fetchSendEmail(values);
       }
       resetForm();
     },
@@ -72,6 +75,9 @@ export default function ContactForm() {
             error={formik.touched.message && Boolean(formik.errors.message)}
             helperText={formik.touched.message && formik.errors.message}
           />
+          {isLoading && <Loading />}
+          {isSuccess && <AlertSuccess message="Message envoyé !" />}
+          {isError && <AlertError message="Erreur !" />}
           <Button sx={{ color: 'white' }} type="submit" variant="contained">
             Envoyer{' '}
           </Button>
