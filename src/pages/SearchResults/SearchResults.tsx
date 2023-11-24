@@ -1,6 +1,8 @@
 // REACT
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+// MUI
+import { Button } from '@mui/material';
 // MAP & GEOLIB
 import { isPointInPolygon } from 'geolib';
 import Map from './Map/Map';
@@ -28,6 +30,7 @@ import './style.scss';
 // --------------------------------------------------------------------//
 
 export default function SearchResults() {
+  const [isActivityPresent, setIsActivitypresent] = useState(false);
   const chosenOrientation = useAppSelector(
     (state) => state.userSearchReducer.direction
   );
@@ -103,16 +106,21 @@ export default function SearchResults() {
   function mainFunction(areaPointGenerated: number[][]) {
     const polygonTest = polygonShaperToObject(areaPointGenerated);
     const filterListByArea = isCoordinatesActivityMatch(polygonTest);
-    const randomActivitySelected = randomizeAreaPoint(filterListByArea);
-    dispatch(
-      updateActivityAddress({
-        addressArrival: randomActivitySelected,
-      } as SearchStoreProps)
-    );
-    return [
-      parseFloat(randomActivitySelected.longitude),
-      parseFloat(randomActivitySelected.latitude),
-    ];
+    if (filterListByArea.length !== 0) {
+      setIsActivitypresent(true);
+      const randomActivitySelected = randomizeAreaPoint(filterListByArea);
+      dispatch(
+        updateActivityAddress({
+          addressArrival: randomActivitySelected,
+        } as SearchStoreProps)
+      );
+      return [
+        parseFloat(randomActivitySelected.longitude),
+        parseFloat(randomActivitySelected.latitude),
+      ];
+    }
+    setIsActivitypresent(false);
+    return [0, 0];
   }
 
   // ----------------------------USEEFFECT-------------------------------//
@@ -146,31 +154,43 @@ export default function SearchResults() {
 
   // ----------------------------RETURN----------------------------------//
   return (
-    <div className="result">
-      <div className="result__map">
-        <Map />
-      </div>
-      <div className="result__details">
-        <div className="result__card">
-          <CardActivityChosen />
-        </div>
-        <div className="result__estimate">
-          <ListingRoadmap />
-        </div>
-      </div>
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {isActivityPresent ? (
+        <div className="result">
+          <div className="result__map">
+            <Map />
+          </div>
+          <div className="result__details">
+            <div className="result__card">
+              <CardActivityChosen />
+            </div>
+            <div className="result__estimate">
+              <ListingRoadmap />
+            </div>
+          </div>
 
-      <div className="result__suggestions">
-        <div className="result__listing">
-          {' '}
-          <ListHotels />
+          <div className="result__suggestions">
+            <div className="result__listing">
+              {' '}
+              <ListHotels />
+            </div>
+            <div className="result__listing">
+              <ListRestaurants />
+            </div>
+            <div className="result__listing">
+              <ListStores />
+            </div>
+          </div>
         </div>
-        <div className="result__listing">
-          <ListRestaurants />
+      ) : (
+        <div className="result">
+          <h2 style={{ color: 'black' }}>Aucun resultats trouvé</h2>
+          <Button variant="contained" onClick={() => navigate('/')}>
+            Relancer une recherche
+          </Button>
         </div>
-        <div className="result__listing">
-          <ListStores />
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }

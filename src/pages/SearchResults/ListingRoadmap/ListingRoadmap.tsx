@@ -20,16 +20,11 @@ dayjs.extend(duration);
 // --------------------------------------------------------------------//
 
 export default function ListingRoadmap() {
-  const [
-    fetchEmission,
-    { data: fuelEmission, isSuccess: successEmissionFetch },
-  ] = useGetEmissionMutation();
-  const [fetchCost, { data: fuelCost, isSuccess: successFuelCost }] =
-    useGetCostMutation();
+  const [fetchEmission, { data: fuelEmission }] = useGetEmissionMutation();
+  const [fetchCost, { data: fuelCost }] = useGetCostMutation();
   const { departureCoordinates, arrivalCoordinates, addressArrival } =
     useAppSelector((state) => state.userSearchReducer);
-  const [fetchFuelCost, { data: fuelCostList, isSuccess: isSuccessFuelCost }] =
-    useGetFuelCostsMutation();
+  const [fetchFuelCost, { data: fuelCostList }] = useGetFuelCostsMutation();
   const [fuelCostAverage, setFuelCostAverage] = useState<number | null>(null);
   const [estimateFuelCost, setEstimateFuelCost] = useState<number | null>(null);
 
@@ -51,7 +46,8 @@ export default function ListingRoadmap() {
   const totalCost = useMemo(() => {
     const toll = calculateTolls;
     if (toll && estimateFuelCost) {
-      return toll + estimateFuelCost;
+      const total = toll + estimateFuelCost;
+      return total.toFixed(1);
     }
     return null;
   }, [calculateTolls, estimateFuelCost]);
